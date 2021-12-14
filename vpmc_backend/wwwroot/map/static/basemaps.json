@@ -1,0 +1,22 @@
+[
+    {
+        "name":"臺灣通用電子地圖(等高線+門牌)",
+        "url":"https://wmts.nlsc.gov.tw/wmts/EMAP5/default/GoogleMapsCompatible/{z}/{y}/{x}"
+    },
+    {
+        "name":"段籍圖",
+        "url":"https://wmts.nlsc.gov.tw/wmts/LANDSECT/default/GoogleMapsCompatible/{z}/{y}/{x}"
+    },
+    {
+        "name":"國土利用現況調查(110年)",
+        "url":"https://wmts.nlsc.gov.tw/wmts/LUIMAP110/default/GoogleMapsCompatible/{z}/{y}/{x}"
+    },
+    {
+        "name":"正射影像(混合)",
+        "url":"https://wmts.nlsc.gov.tw/wmts/PHOTO_MIX/default/GoogleMapsCompatible/{z}/{y}/{x}"
+    },
+    {
+        "name":"各級學校範圍圖",
+        "url":"https://wmts.nlsc.gov.tw/wmts/SCHOOL/default/GoogleMapsCompatible/{z}/{y}/{x}"
+    }
+]

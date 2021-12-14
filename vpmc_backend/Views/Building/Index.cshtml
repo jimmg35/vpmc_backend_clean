@@ -1,0 +1,281 @@
+﻿@model IEnumerable<vpmc_backend.Models.BuildingSurveyDataSheet>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandMarkCounty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandMarkVillage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandMarkName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandMarkCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildMarkCounty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildMarkVillage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildMarkName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildMarkCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildAddressCounty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildAddressVillage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandRightsOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandRightsStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandRightsHolding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingRightsOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingRightsStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingRightsHolding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherRights)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandUses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingCoverageRatio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FloorAreaRatio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingUsage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingStructure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingFinishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingUpFloor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingDownFloor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyFloor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InspectionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValueOpinionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppraisalObject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppraisalDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EvaluationRightsType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppraisalCondition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TranscriptPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoPath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssetType.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandMarkCounty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandMarkVillage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandMarkName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandMarkCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildMarkCounty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildMarkVillage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildMarkName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildMarkCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildAddressCounty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildAddressVillage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandRightsOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandRightsStatus.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandRightsHolding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingRightsOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingRightsStatus.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingRightsHolding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherRights)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandUses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingCoverageRatio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FloorAreaRatio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingUsage.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingStructure.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingFinishDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingUpFloor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingDownFloor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyFloor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueOpinionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppraisalObject.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppraisalDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceType.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EvaluationRightsType.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppraisalCondition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurveyDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TranscriptPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhotoPath)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
