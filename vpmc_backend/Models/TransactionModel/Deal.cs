@@ -32,9 +32,9 @@ namespace vpmc_backend.Models
         public float? MainBuildingArea { get; set; }
         public float? ParkShiftingArea { get; set; }
         public float? SubBuildingArea { get; set; }
-        public int? ParkTotalPrice { get; set; }
+        public long? ParkTotalPrice { get; set; }
         public float? BelconyArea { get; set; }
-        public int? TotalPrice { get; set; }
+        public long? TotalPrice { get; set; }
         public float? UnitPrice { get; set; }
         public short? BathNumber { get; set; }
         public short? BedNumber { get; set; }
