@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace vpmc_backend.Models
 {
-    public class Deal
+    public class Deal_Manage
     {
         public string Id { get; set; }
         public string NonMetroLandUseDistrict { get; set; }
@@ -44,5 +44,42 @@ namespace vpmc_backend.Models
         public string HasElevator { get; set; }
         public int? CoordinateX { get; set; }
         public int? CoordinateY { get; set; }
+        public string ManageName { get; set; }
+        public string ManageAddress { get; set; }
+        public string LicenseNum { get; set; }
+        public string LicensedDate { get; set; }
+        public string LicensedRecord { get; set; }
+        public string LicenseRecordNum { get; set; }
+        public string LicenseType { get; set; }
+        public string LicenseGiven { get; set; }
+        public string OirgLicenseGiven { get; set; }
+        public short? DesignChanged { get; set; }
+        public string SiteArea { get; set; }
+        public string BuildingArea { get; set; }
+        public string TotalFloorArea { get; set; }
+        public string BuildingHeight { get; set; }
+        public string UndergroundArea { get; set; }
+        public string OpenArea { get; set; }
+        public string BuildingType { get; set; }
+        public string StructureType { get; set; }
+        public short? FloorAbove { get; set; }
+        public string FloorBelow { get; set; }
+        public string BuildingNum { get; set; }
+        public string UnitNumber { get; set; }
+        public string Representative { get; set; }
+        public string Designer { get; set; }
+        public string Supervision { get; set; }
+        public string Contractor { get; set; }
+        public string Misc { get; set; }
+        public string ParkingSpace { get; set; }
+        public string IssuedDate { get; set; }
+        public string ConstructionStart { get; set; }
+        public string ConstructionEnd { get; set; }
+        public string FloorSummary { get; set; }
+        public string ConstructionParcel { get; set; }
+        public string ConstructionAddress { get; set; }
+        public string County { get; set; }
+        public float? Longitude { get; set; }
+        public float? Latitude { get; set; }
     }
 }

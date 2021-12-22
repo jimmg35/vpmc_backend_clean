@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vpmc_backend.Models;
 
 namespace vpmc_backend.Migrations
 {
     [DbContext(typeof(WebApiContext))]
-    partial class WebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20211222021337_addDeall")]
+    partial class addDeall
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -371,8 +373,8 @@ namespace vpmc_backend.Migrations
                     b.Property<float?>("ParkShiftingArea")
                         .HasColumnType("real");
 
-                    b.Property<long?>("ParkTotalPrice")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("ParkTotalPrice")
+                        .HasColumnType("int");
 
                     b.Property<short?>("ParkTransactionAmount")
                         .HasColumnType("smallint");
@@ -389,8 +391,8 @@ namespace vpmc_backend.Migrations
                     b.Property<short?>("TotalFloorNumber")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("TotalPrice")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("TotalPrice")
+                        .HasColumnType("int");
 
                     b.Property<string>("Town")
                         .HasColumnType("nvarchar(max)");
@@ -576,8 +578,8 @@ namespace vpmc_backend.Migrations
                     b.Property<float?>("ParkShiftingArea")
                         .HasColumnType("real");
 
-                    b.Property<long?>("ParkTotalPrice")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("ParkTotalPrice")
+                        .HasColumnType("int");
 
                     b.Property<short?>("ParkTransactionAmount")
                         .HasColumnType("smallint");
@@ -612,8 +614,8 @@ namespace vpmc_backend.Migrations
                     b.Property<short?>("TotalFloorNumber")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("TotalPrice")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("TotalPrice")
+                        .HasColumnType("int");
 
                     b.Property<string>("Town")
                         .HasColumnType("nvarchar(max)");
