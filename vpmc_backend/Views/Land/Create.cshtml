@@ -1,0 +1,197 @@
+﻿@model vpmc_backend.Models.LandSurveyDataSheet
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>LandSurveyDataSheet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssetTypeId" class="control-label"></label>
+                <select asp-for="AssetTypeId" class ="form-control" asp-items="ViewBag.AssetTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandMarkCounty" class="control-label"></label>
+                <input asp-for="LandMarkCounty" class="form-control" />
+                <span asp-validation-for="LandMarkCounty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandMarkVillage" class="control-label"></label>
+                <input asp-for="LandMarkVillage" class="form-control" />
+                <span asp-validation-for="LandMarkVillage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandMarkName" class="control-label"></label>
+                <input asp-for="LandMarkName" class="form-control" />
+                <span asp-validation-for="LandMarkName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandMarkCode" class="control-label"></label>
+                <input asp-for="LandMarkCode" class="form-control" />
+                <span asp-validation-for="LandMarkCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildMarkCounty" class="control-label"></label>
+                <input asp-for="BuildMarkCounty" class="form-control" />
+                <span asp-validation-for="BuildMarkCounty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildMarkVillage" class="control-label"></label>
+                <input asp-for="BuildMarkVillage" class="form-control" />
+                <span asp-validation-for="BuildMarkVillage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildMarkName" class="control-label"></label>
+                <input asp-for="BuildMarkName" class="form-control" />
+                <span asp-validation-for="BuildMarkName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildMarkCode" class="control-label"></label>
+                <input asp-for="BuildMarkCode" class="form-control" />
+                <span asp-validation-for="BuildMarkCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildAddressCounty" class="control-label"></label>
+                <input asp-for="BuildAddressCounty" class="form-control" />
+                <span asp-validation-for="BuildAddressCounty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildAddressVillage" class="control-label"></label>
+                <input asp-for="BuildAddressVillage" class="form-control" />
+                <span asp-validation-for="BuildAddressVillage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildAddress" class="control-label"></label>
+                <input asp-for="BuildAddress" class="form-control" />
+                <span asp-validation-for="BuildAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandArea" class="control-label"></label>
+                <input asp-for="LandArea" class="form-control" />
+                <span asp-validation-for="LandArea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandRightsOwner" class="control-label"></label>
+                <input asp-for="LandRightsOwner" class="form-control" />
+                <span asp-validation-for="LandRightsOwner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandRightsStatusId" class="control-label"></label>
+                <select asp-for="LandRightsStatusId" class ="form-control" asp-items="ViewBag.LandRightsStatusId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandRightsHolding" class="control-label"></label>
+                <input asp-for="LandRightsHolding" class="form-control" />
+                <span asp-validation-for="LandRightsHolding" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherRights" class="control-label"></label>
+                <input asp-for="OtherRights" class="form-control" />
+                <span asp-validation-for="OtherRights" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandUses" class="control-label"></label>
+                <input asp-for="LandUses" class="form-control" />
+                <span asp-validation-for="LandUses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildingCoverageRatio" class="control-label"></label>
+                <input asp-for="BuildingCoverageRatio" class="form-control" />
+                <span asp-validation-for="BuildingCoverageRatio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FloorAreaRatio" class="control-label"></label>
+                <input asp-for="FloorAreaRatio" class="form-control" />
+                <span asp-validation-for="FloorAreaRatio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InspectionDate" class="control-label"></label>
+                <input asp-for="InspectionDate" class="form-control" />
+                <span asp-validation-for="InspectionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValueOpinionDate" class="control-label"></label>
+                <input asp-for="ValueOpinionDate" class="form-control" />
+                <span asp-validation-for="ValueOpinionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppraisalObjectId" class="control-label"></label>
+                <select asp-for="AppraisalObjectId" class ="form-control" asp-items="ViewBag.AppraisalObjectId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppraisalDescription" class="control-label"></label>
+                <input asp-for="AppraisalDescription" class="form-control" />
+                <span asp-validation-for="AppraisalDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceTypeId" class="control-label"></label>
+                <select asp-for="PriceTypeId" class ="form-control" asp-items="ViewBag.PriceTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EvaluationRightsTypeId" class="control-label"></label>
+                <select asp-for="EvaluationRightsTypeId" class ="form-control" asp-items="ViewBag.EvaluationRightsTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppraisalCondition" class="control-label"></label>
+                <input asp-for="AppraisalCondition" class="form-control" />
+                <span asp-validation-for="AppraisalCondition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurveyorName" class="control-label"></label>
+                <input asp-for="SurveyorName" class="form-control" />
+                <span asp-validation-for="SurveyorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurveyDescription" class="control-label"></label>
+                <input asp-for="SurveyDescription" class="form-control" />
+                <span asp-validation-for="SurveyDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TranscriptPath" class="control-label"></label>
+                <input asp-for="TranscriptPath" class="form-control" />
+                <span asp-validation-for="TranscriptPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoPath" class="control-label"></label>
+                <input asp-for="PhotoPath" class="form-control" />
+                <span asp-validation-for="PhotoPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>
