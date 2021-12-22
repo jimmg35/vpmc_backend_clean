@@ -291,6 +291,353 @@ namespace vpmc_backend.Migrations
                     b.ToTable("BuildingSurveyDataSheet");
                 });
 
+            modelBuilder.Entity("vpmc_backend.Models.Deal", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("BathNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<short?>("BedNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<float?>("BelconyArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("BuildingMaterial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("BuildingShiftingArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("BuildingState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("BuildingTransactionAmount")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("CompletionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CoordinateX")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CoordinateY")
+                        .HasColumnType("int");
+
+                    b.Property<short?>("HallNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("HasCompartmented")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HasElevator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HasManageOrganization")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("LandShiftingArea")
+                        .HasColumnType("real");
+
+                    b.Property<short?>("LandTransactionAmount")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("LandUse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("MainBuildingArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("MainUse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NonMetroLandUse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NonMetroLandUseDistrict")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParkCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("ParkShiftingArea")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("ParkTotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<short?>("ParkTransactionAmount")
+                        .HasColumnType("smallint");
+
+                    b.Property<int?>("ParsedShiftingLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShiftingLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("SubBuildingArea")
+                        .HasColumnType("real");
+
+                    b.Property<short?>("TotalFloorNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<int?>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Town")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionSign")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("UnitPrice")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Deal");
+                });
+
+            modelBuilder.Entity("vpmc_backend.Models.Deal_Manage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("BathNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<short?>("BedNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<float?>("BelconyArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("BuildingArea")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BuildingHeight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BuildingMaterial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BuildingNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("BuildingShiftingArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("BuildingState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("BuildingTransactionAmount")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("BuildingType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompletionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConstructionAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConstructionEnd")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConstructionParcel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConstructionStart")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contractor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CoordinateX")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CoordinateY")
+                        .HasColumnType("int");
+
+                    b.Property<string>("County")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("DesignChanged")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Designer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("FloorAbove")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("FloorBelow")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FloorSummary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("HallNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("HasCompartmented")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HasElevator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HasManageOrganization")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IssuedDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("LandShiftingArea")
+                        .HasColumnType("real");
+
+                    b.Property<short?>("LandTransactionAmount")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("LandUse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("Latitude")
+                        .HasColumnType("real");
+
+                    b.Property<string>("LicenseGiven")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicenseNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicenseRecordNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicenseType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicensedDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicensedRecord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("Longitude")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("MainBuildingArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("MainUse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManageAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Misc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NonMetroLandUse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NonMetroLandUseDistrict")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OirgLicenseGiven")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenArea")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParkCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("ParkShiftingArea")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("ParkTotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<short?>("ParkTransactionAmount")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("ParkingSpace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParsedShiftingLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Representative")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShiftingLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SiteArea")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StructureType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("SubBuildingArea")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Supervision")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TotalFloorArea")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short?>("TotalFloorNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<int?>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Town")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionSign")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UndergroundArea")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnitNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("UnitPrice")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Deal_Manage");
+                });
+
             modelBuilder.Entity("vpmc_backend.Models.LandAppraisalObject", b =>
                 {
                     b.Property<int>("Id")
