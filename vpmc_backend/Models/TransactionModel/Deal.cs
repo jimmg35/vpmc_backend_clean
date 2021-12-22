@@ -3,67 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace vpmc_backend.Models.TransactionModel
+namespace vpmc_backend.Models
 {
     public class Deal
     {
-
-        
-        /*public string Id { get; set; }                       // "編號"
-        public string? nonMetroLandUseDistrict { get; set; } // "非都市土地使用分區",
-        public int? landTransAmount { get; set; }//"土地交易筆數",
-        public int? buildingTransAmount { get; set; }//"建物交易筆數",
-        public int? parkTransAmount { get; set; }//"車位交易筆數",
-        public int? totalFloorNumber { get; set; }//"總樓層數",
-        
-        public string? buildingMaterial { get; set; }
-        public string? transactionSign { get; set; }
-        public string? nonMetroLandUse { get; set; }
-        public string? transactionDate { get; set; }
-        public string? completionDate { get; set; }
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        public string?
-        "主要建材",
-        "交易標的",
-        "非都市土地使用編定",
-        "交易年月日",
-        "建築完成年月",
-        "移轉層次",
-        "解析移轉層次",
-        "建物型態",
-        "車位類別",
-        "主要用途",
-        "土地位置/建物門牌",
-        "都市土地使用分區",
-        "鄉鎮市區",
-        "備註",
-        "建物移轉總面積(平方公尺)",
-        "土地移轉總面積(平方公尺)",
-        "主建物面積",
-        "車位移轉總面積(平方公尺)",
-        "附屬建物面積",
-        "車位總價(元)",
-        "陽台面積",
-        "總價(元)",
-        "單價(元/平方公尺)",
-        "建物現況格局-衛",
-        "建物現況格局-房",
-        "建物現況格局-廳",
-        "有無管理組織",
-        "建物現況格局-隔間",
-        "電梯",
-        "交易標的橫坐標",	
-        "交易標的縱坐標" */
-        
+        public string Id { get; set; }
+        public string NonMetroLandUseDistrict { get; set; }
+        public short? LandTransactionAmount { get; set; }
+        public short? BuildingTransactionAmount { get; set; }
+        public short? ParkTransactionAmount { get; set; }
+        public short? TotalFloorNumber { get; set; }
+        public string BuildingMaterial { get; set; }
+        public string TransactionSign { get; set; }
+        public string NonMetroLandUse { get; set; }
+        public string TransactionDate { get; set; }
+        public string CompletionDate { get; set; }
+        public string ShiftingLevel { get; set; }
+        public int? ParsedShiftingLevel { get; set; }
+        public string BuildingState { get; set; }
+        public string ParkCategory { get; set; }
+        public string MainUse { get; set; }
+        public string Address { get; set; }
+        public string LandUse { get; set; }
+        public string Town { get; set; }
+        public string Note { get; set; }
+        public float? BuildingShiftingArea { get; set; }
+        public float? LandShiftingArea { get; set; }
+        public float? MainBuildingArea { get; set; }
+        public float? ParkShiftingArea { get; set; }
+        public float? SubBuildingArea { get; set; }
+        public int? ParkTotalPrice { get; set; }
+        public float? BelconyArea { get; set; }
+        public int? TotalPrice { get; set; }
+        public float? UnitPrice { get; set; }
+        public short? BathNumber { get; set; }
+        public short? BedNumber { get; set; }
+        public short? HallNumber { get; set; }
+        public string HasManageOrganization { get; set; }
+        public string HasCompartmented { get; set; }
+        public string HasElevator { get; set; }
+        public int? CoordinateX { get; set; }
+        public int? CoordinateY { get; set; }
     }
 }
