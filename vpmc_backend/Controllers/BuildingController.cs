@@ -124,15 +124,14 @@ namespace vpmc_backend.Controllers
             {
                 ViewData["UserId"] = _userManager.GetUserId(User);
             }
+
+            var countyList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName}).Distinct();
+
+            ViewData["County"] = new SelectList(countyList, "CountyName", "CountyName","臺北市");
+
+            var TownList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName , TownName=x.TownName}).Where(x => x.CountyName == "臺北市").Distinct();
+            ViewData["Town"] = new SelectList(TownList, "TownName", "TownName", "中正區");
             
-            //ViewData["AppraisalObjectId"] = new SelectList(_context.Building_AppraisalObject, "Id", "Id");
-            //ViewData["AssetTypeId"] = new SelectList(_context.Building_AssetType, "Id", "Id");
-            //ViewData["BuildingRightsStatusId"] = new SelectList(_context.Building_BuildingRightsStatus, "Id", "Id");
-            //ViewData["BuildingStructureId"] = new SelectList(_context.Building_BuildingStructure, "Id", "Id");
-            //ViewData["BuildingUsageId"] = new SelectList(_context.Building_BuildingUsage, "Id", "Id");
-            //ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Building_EvaluationRightsType, "Id", "Id");
-            //ViewData["LandRightsStatusId"] = new SelectList(_context.Building_LandRightsStatus, "Id", "Id");
-            //ViewData["PriceTypeId"] = new SelectList(_context.Building_PriceType, "Id", "Id");
             return View();
         }
 
@@ -188,15 +187,7 @@ namespace vpmc_backend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["Id"] = Guid.NewGuid().ToString();
-            //ViewData["AppraisalObjectId"] = new SelectList(_context.Building_AppraisalObject, "Id", "Id", buildingSurveyDataSheet.AppraisalObjectId);
-            //ViewData["AssetTypeId"] = new SelectList(_context.Building_AssetType, "Id", "Id", buildingSurveyDataSheet.AssetTypeId);
-            //ViewData["BuildingRightsStatusId"] = new SelectList(_context.Building_BuildingRightsStatus, "Id", "Id", buildingSurveyDataSheet.BuildingRightsStatusId);
-            //ViewData["BuildingStructureId"] = new SelectList(_context.Building_BuildingStructure, "Id", "Id", buildingSurveyDataSheet.BuildingStructureId);
-            //ViewData["BuildingUsageId"] = new SelectList(_context.Building_BuildingUsage, "Id", "Id", buildingSurveyDataSheet.BuildingUsageId);
-            //ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Building_EvaluationRightsType, "Id", "Id", buildingSurveyDataSheet.EvaluationRightsTypeId);
-            //ViewData["LandRightsStatusId"] = new SelectList(_context.Building_LandRightsStatus, "Id", "Id", buildingSurveyDataSheet.LandRightsStatusId);
-            //ViewData["PriceTypeId"] = new SelectList(_context.Building_PriceType, "Id", "Id", buildingSurveyDataSheet.PriceTypeId);
+            
             return View((BuildingSurveyDataSheet)buildingSurveyDataSheet);
         }
 
@@ -303,6 +294,19 @@ namespace vpmc_backend.Controllers
             _context.BuildingSurveyDataSheet.Remove(buildingSurveyDataSheet);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        //POST: Buidling/getTownList
+        [HttpPost]
+        public PartialViewResult getTownList(string countyName)
+        {
+            var TownList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName, TownName = x.TownName }).Where(x => x.CountyName == countyName).Distinct();
+            ViewData["Town"] = new SelectList(TownList, "TownName", "TownName");
+
+            var partial = PartialView("townDropdown");
+            partial.ViewData = ViewData;
+
+            return partial;
         }
 
         private bool BuildingSurveyDataSheetExists(string id)

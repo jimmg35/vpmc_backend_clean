@@ -15,9 +15,30 @@ namespace vpmc_backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.15")
+                .HasAnnotation("ProductVersion", "3.1.22")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("vpmc_backend.Models.Administrative_Area", b =>
+                {
+                    b.Property<int>("OID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CountyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TownName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VillName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OID");
+
+                    b.ToTable("Administrative_Area");
+                });
 
             modelBuilder.Entity("vpmc_backend.Models.BuildingAppraisalObject", b =>
                 {

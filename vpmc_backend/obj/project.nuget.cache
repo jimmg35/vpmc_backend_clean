@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nMr83Uv6Yo/Nmh2aSBtgHKvC1jCa4geh2mx0ezlRNdhn5RpvIcsiebB2gauRpvkXiI/0BpFUKixPZ4e4KIyL/g==",
+  "dgSpecHash": "PZpsoQUWuF0KP1ntMv/+ybC24ZE5goMigb82M5F0GKY4aBh2OxLUxO6UoytqgaKHON7u6zF1Yd20Elr68Im/sQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\r1111\\source\\repos\\yungming0119\\vpmc_backend_clean\\vpmc_backend\\vpmc_backend.csproj",
+  "projectFilePath": "C:\\Users\\r1111\\Source\\Repos\\vpmc_backend_clean_2\\vpmc_backend\\vpmc_backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\r1111\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\r1111\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
