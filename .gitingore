@@ -16,3 +16,5 @@ Version.cs
 Version.h
 Version.cpp
 .vs/vpmc_backend/v16/.suo
+
+./vpmc_backend/obj/
