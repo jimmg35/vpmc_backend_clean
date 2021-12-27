@@ -27,28 +27,8 @@ namespace vpmc_backend.Controllers
         [HttpGet("getCommittee")]
         public IEnumerable<string> Get(string county, string town)
         {
-            //_context.Deal_Manage.Where(row => DbFunctions.Like(row.ConstructionParcel, "%expression%"));
-
             var result = from deal in _context.Deal_Manage where deal.ConstructionParcel.Contains(county + town) select deal.ManageName;
             return result.Distinct().ToList();
-            
-            /* Debug.WriteLine("====================");
-            foreach (var i in aa.ToList())
-            {
-                Debug.WriteLine(i);
-            }*/
-            /*string queryString = "SELECT ManageName FROM Deal_Manage WHERE ConstructionParcel LIKE '%{" + county + town + "}%';";
-            List<Deal_Manage> result = _context.Deal_Manage.FromSqlRaw(queryString).ToListAsync();
-            Debug.WriteLine("=======================");
-            Debug.WriteLine(result);
-            foreach(var i in result)
-            {
-
-            }*/
-            /*Debug.WriteLine("====================");
-            Debug.WriteLine(result.Select(row => row.ManageName).ToList());
-
-            return result.Select(row => row.ManageName).ToList();*/
         }
     }
 }
