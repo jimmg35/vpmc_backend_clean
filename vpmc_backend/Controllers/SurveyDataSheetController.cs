@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using vpmc_backend.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -83,6 +84,36 @@ namespace vpmc_backend.Controllers
             return new string[] { guid, SurveyDataSheetPath, dbPhotoPath };
         }
 
+        [AllowAnonymous]
+        [HttpPost("uploadSurveyPhoto")]
+        //上傳現勘照片
+        private string[] uploadSurveyPhoto([FromForm]List<IFormFile> files, string guid)
+        {
+            string basePath = _buildingSDS_path;
+            string uploadSpace = basePath + guid + "\\";
+            string photoUploadSpace = uploadSpace + "img\\";
+            string dbPhotoPath = "";
+            if (!Directory.Exists(uploadSpace))
+            {
+                Directory.CreateDirectory(uploadSpace);
+            }
+            if (!Directory.Exists(photoUploadSpace))
+            {
+                Directory.CreateDirectory(photoUploadSpace);
+            }            
+            // 寫入照片檔案
+            for (int i = 0; i < files.Count; i++)
+            {
+                string photoPath = photoUploadSpace + files[i].FileName;
+                using (FileStream fileStream = System.IO.File.Create(photoPath))
+                {
+                    files[i].CopyTo(fileStream);
+                    fileStream.Flush();
+                }
+                dbPhotoPath += photoPath + "|";
+            }
+            return new string[] { guid, dbPhotoPath };
+        }
 
         [AllowAnonymous]
         [HttpPost("addBuildingSurveyDataSheet")]
