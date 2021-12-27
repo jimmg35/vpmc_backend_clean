@@ -26,7 +26,10 @@ namespace vpmc_backend.Controllers
         [HttpGet("getCounty")]
         public IEnumerable<string> Get()
         {
-            return _context.Administrative_Area.Select(row => row.CountyName).Distinct().ToList();
+            return _context.Administrative_Area
+                .Select(row => row.CountyName)
+                .Distinct()
+                .ToList();
         }
 
         [AllowAnonymous]
