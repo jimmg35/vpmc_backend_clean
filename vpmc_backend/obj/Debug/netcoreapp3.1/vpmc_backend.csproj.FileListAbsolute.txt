@@ -859,3 +859,16 @@ C:\Users\r1111\Source\Repos\vpmc_backend_clean_2\vpmc_backend\obj\Debug\netcorea
 C:\Users\r1111\Source\Repos\vpmc_backend_clean_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Details.cshtml.g.cs
 C:\Users\r1111\Source\Repos\vpmc_backend_clean_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Edit.cshtml.g.cs
 C:\Users\r1111\Source\Repos\vpmc_backend_clean_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Index.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Building\townDropdown.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Land\Create.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Land\Delete.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Land\Details.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Land\Edit.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Land\Index.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Land\townDropdown.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Create.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Delete.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Details.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Edit.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Park\Index.cshtml.g.cs
+D:\vpmc_backend_2\vpmc_backend\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_EmptyLayout.cshtml.g.cs

@@ -65,6 +65,9 @@ namespace vpmc_backend.Models
         //實價登錄交易資料表
         public DbSet<Deal> Deal { get; set; }
         public DbSet<Deal_Manage> Deal_Manage { get; set; }
+
+
+
         //表單元件
         public DbSet<Administrative_Area> Administrative_Area { get; set; }
     }
