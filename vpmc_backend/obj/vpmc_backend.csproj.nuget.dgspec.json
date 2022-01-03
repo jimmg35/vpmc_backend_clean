@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\r1111\\Source\\Repos\\vpmc_backend_clean_2\\vpmc_backend\\vpmc_backend.csproj": {}
+    "D:\\vpmc_backend_2\\vpmc_backend\\vpmc_backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\r1111\\Source\\Repos\\vpmc_backend_clean_2\\vpmc_backend\\vpmc_backend.csproj": {
+    "D:\\vpmc_backend_2\\vpmc_backend\\vpmc_backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\r1111\\Source\\Repos\\vpmc_backend_clean_2\\vpmc_backend\\vpmc_backend.csproj",
+        "projectUniqueName": "D:\\vpmc_backend_2\\vpmc_backend\\vpmc_backend.csproj",
         "projectName": "vpmc_backend",
-        "projectPath": "C:\\Users\\r1111\\Source\\Repos\\vpmc_backend_clean_2\\vpmc_backend\\vpmc_backend.csproj",
-        "packagesPath": "C:\\Users\\r1111\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\r1111\\Source\\Repos\\vpmc_backend_clean_2\\vpmc_backend\\obj\\",
+        "projectPath": "D:\\vpmc_backend_2\\vpmc_backend\\vpmc_backend.csproj",
+        "packagesPath": "C:\\Users\\Jim\\.nuget\\packages\\",
+        "outputPath": "D:\\vpmc_backend_2\\vpmc_backend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\r1111\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jim\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -115,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
