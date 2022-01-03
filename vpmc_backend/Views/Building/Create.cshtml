@@ -1,8 +1,8 @@
-﻿@model vpmc_backend.Models.BuildingSurveyDataSheet
+﻿@model vpmc_backend.Models.BuildingSurveySheetForm
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "";
+    ViewData["Title"] = "新增建物現勘資料表";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
 
@@ -12,14 +12,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
             <h3>步驟一：載入勘估標的土地/建物謄本</h3>
-            <input type="file" multiple asp-for="TranscriptPath" class="form-control" />
+            <input id="Transcripts" type="file" asp-for="TranscriptFile" class="form-control"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <h3>步驟二：輸入勘估標的基本資料</h3>
             <div class="form-group">
                 @*<label asp-for="Id" class="control-label"></label>*@
-                <input type="hidden" asp-for="Id" class="form-control" />
+                <input type="hidden" id="Id" asp-for="Id" class="form-control" value=@ViewData["Id"]/>
                 @*<span asp-validation-for="Id" class="text-danger"></span>*@
             </div>
             <div class="form-group">
@@ -31,15 +31,15 @@
             <div class="form-group">
                 <label asp-for="AssetTypeId" class="control-label">1.資產類型：</label>
                 <input type="radio" asp-for="AssetTypeId" class="form-control" value="1" />土地
-                <input type="radio" asp-for="AssetTypeId" class="form-control" value="2" />建物
+                <input type="radio" asp-for="AssetTypeId" class="form-control" value="2" checked/>建物
                 <input type="radio" asp-for="AssetTypeId" class="form-control" value="3" />車位
-                @*<select asp-for="AssetTypeId" class="form-control" asp-items="ViewBag.AssetTypeId"></select>*@
+@*                <select asp-for="AssetTypeId" class="form-control" asp-items="ViewBag.AssetTypeId"></select>*@
             </div>
             <div class="form-group">
                 <label class="control-label">2.土地標示：</label>
-                <input asp-for="LandMarkCounty" class="form-control" />
+                <select asp-for="LandMarkCounty" id="LandMarkCounty" class="form-control" asp-items="ViewBag.County"></select>
                 <span asp-validation-for="LandMarkCounty" class="text-danger"></span>
-                <input asp-for="LandMarkVillage" class="form-control" />
+                <select asp-for="LandMarkVillage" id="LandMarkVillage" class="form-control" asp-items="ViewBag.Town"></select>
                 <span asp-validation-for="LandMarkVillage" class="text-danger"></span>
                 <label class="control-label">段小段：</label>
                 <input asp-for="LandMarkName" class="form-control" />
@@ -47,26 +47,13 @@
                 <input asp-for="LandMarkCode" class="form-control" />
                 <span asp-validation-for="LandMarkCode" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-            <label asp-for="LandMarkVillage" class="control-label"></label>
-            <input asp-for="LandMarkVillage" class="form-control" />
-            <span asp-validation-for="LandMarkVillage" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="LandMarkName" class="control-label"></label>
-            <input asp-for="LandMarkName" class="form-control" />
-            <span asp-validation-for="LandMarkName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="LandMarkCode" class="control-label"></label>
-            <input asp-for="LandMarkCode" class="form-control" />
-            <span asp-validation-for="LandMarkCode" class="text-danger"></span>
-        </div>*@
             <div class="form-group">
                 <label class="control-label">3.建物標示：</label>
-                <input asp-for="BuildMarkCounty" class="form-control" />
+                @*<input asp-for="BuildMarkCounty" class="form-control" />*@
+                <select asp-for="BuildMarkCounty" id="BuildMarkCounty" class="form-control" asp-items="ViewBag.County"></select>
                 <span asp-validation-for="BuildMarkCounty" class="text-danger"></span>
-                <input asp-for="BuildMarkVillage" class="form-control" />
+                @*<input asp-for="BuildMarkVillage" class="form-control" />*@
+                <select asp-for="BuildMarkVillage" id="BuildMarkVillage" class="form-control" asp-items="ViewBag.Town"></select>
                 <span asp-validation-for="BuildMarkVillage" class="text-danger"></span>
                 <label class="control-label">段小段：</label>
                 <input asp-for="BuildMarkName" class="form-control" />
@@ -101,17 +88,19 @@
         </div>*@
             <div class="form-group">
                 <label asp-for="BuildAddress" class="control-label">4.建物門牌：</label>
+                <select asp-for="BuildAddressCounty" id="BuildAddressCounty" class="form-control" asp-items="ViewBag.County"></select>
+                <select asp-for="BuildAddressVillage" id="BuildAddressVillage" class="form-control" asp-items="ViewBag.Town"></select>
                 <input asp-for="BuildAddress" class="form-control" />
                 <span asp-validation-for="BuildAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LandArea" class="control-label">5.土地面積：</label>
-                <input asp-for="LandArea" class="form-control" />
+                <input type="number" step="0.01" asp-for="LandArea" class="form-control" />
                 <span asp-validation-for="LandArea" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BuildingArea" class="control-label">6.建物面積：</label>
-                <input asp-for="BuildingArea" class="form-control" />
+                <input type="number" step="0.01" asp-for="BuildingArea" class="form-control" />
                 <span asp-validation-for="BuildingArea" class="text-danger"></span>
             </div>
             <h4>二、產權分析 </h4>
@@ -119,7 +108,7 @@
                 <label asp-for="LandRightsOwner" class="control-label">1.土地所有權人及權利範圍：</label>
                 <input asp-for="LandRightsOwner" class="form-control" />
                 <span asp-validation-for="LandRightsOwner" class="text-danger"></span>
-                <input type="radio" asp-for="LandRightsStatusId" class="form-control" value="1" />名下全部
+                <input type="radio" asp-for="LandRightsStatusId" class="form-control" value="1" checked/>名下全部
                 <input type="radio" asp-for="LandRightsStatusId" class="form-control" value="2" />持分產權
                 <input asp-for="LandRightsHolding" class="form-control" />
                 <span asp-validation-for="LandRightsHolding" class="text-danger"></span>
@@ -137,8 +126,9 @@
                 <label asp-for="BuildingRightsOwner" class="control-label">2.建物所有權人及權利範圍：</label>
                 <input asp-for="BuildingRightsOwner" class="form-control" />
                 <span asp-validation-for="BuildingRightsOwner" class="text-danger"></span>
-                <input type="radio" asp-for="BuildingRightsStatusId" class="form-control" value="1" />名下全部
+                <input type="radio" asp-for="BuildingRightsStatusId" class="form-control" value="1" checked/>名下全部
                 <input type="radio" asp-for="BuildingRightsStatusId" class="form-control" value="2" />持分產權
+                <input asp-for="BuildingRightsHolding" class="form-control" />
             </div>
             @*<div class="form-group">
             <label asp-for="BuildingRightsStatusId" class="control-label"></label>
@@ -159,7 +149,7 @@
             <h4>三、使用現況</h4>
             <div class="form-group">
                 <label asp-for="LandUses" class="control-label">1.使用分區</label>
-                <input type="radio" asp-for="LandUses" class="form-control" value="1" />都市土地
+                <input type="radio" asp-for="LandUses" class="form-control" value="1" checked/>都市土地
                 <input type="radio" asp-for="LandUses" class="form-control" value="2" />非都市土地
                 @*<input asp-for="LandUses" class="form-control" />
             <span asp-validation-for="LandUses" class="text-danger"></span>*@
@@ -167,10 +157,10 @@
             <div class="form-group">
                 <label class="control-label">2.使用強度：</label>
                 <label asp-for="BuildingCoverageRatio" class="control-label">法定建蔽率：</label>
-                <input asp-for="BuildingCoverageRatio" class="form-control" />
+                <input type="number" step="0.1" asp-for="BuildingCoverageRatio" class="form-control" />
                 <span asp-validation-for="BuildingCoverageRatio" class="text-danger"></span>
                 <label asp-for="FloorAreaRatio" class="control-label">法定容積率：</label>
-                <input asp-for="FloorAreaRatio" class="form-control" />
+                <input type="number" step="0.1" asp-for="FloorAreaRatio" class="form-control" />
                 <span asp-validation-for="FloorAreaRatio" class="text-danger"></span>
             </div>
             @*<div class="form-group">
@@ -199,12 +189,12 @@
                 <label asp-for="BuildingStructureId" class="control-label">4.建物建造：</label>
                 @{
                     SelectList BuildingStructureList = new SelectList(new List<SelectListItem> {
-                        new SelectListItem{ Text = "鋼骨造", Value="1"},
-                        new SelectListItem{ Text = "鋼骨鋼筋混凝土造", Value="2"},
-                        new SelectListItem{ Text = "鋼筋混凝土造", Value="3"},
-                        new SelectListItem{ Text = "鋼架造", Value="4"},
-                        new SelectListItem{ Text = "輕型鋼架造", Value="5"},
-                        new SelectListItem{ Text = "加強磚造", Value="6"}
+                        new SelectListItem{ Text = "鋼骨造", Value="15"},
+                        new SelectListItem{ Text = "鋼骨鋼筋混凝土造", Value="16"},
+                        new SelectListItem{ Text = "鋼筋混凝土造", Value="17"},
+                        new SelectListItem{ Text = "鋼架造", Value="18"},
+                        new SelectListItem{ Text = "輕型鋼架造", Value="19"},
+                        new SelectListItem{ Text = "加強磚造", Value="20"}
                     }, "Value", "Text");
                 }
                 @Html.DropDownListFor(m => m.BuildingStructureId, BuildingStructureList)
@@ -325,13 +315,12 @@
             </div>*@
             <div class="form-group">
                 <label asp-for="PhotoPath" class="control-label">3.現勘照片：</label>
-                <input type="file" multiple class="form-control" id="photoUploader" onchange="filesUpload()"/>
+                <input type="file" multiple asp-for="SurveyPhoto" class="form-control"/>
                 <input type="hidden" multiple asp-for="PhotoPath" class="form-control" /> 
                 <span asp-validation-for="PhotoPath" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
+            <input type="submit" value="新增" id="CreateBtn" class="btn btn-primary" />
         </form>
     </div>
 </div>
@@ -342,6 +331,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/form.js"></script>
 }
 
 <style>
@@ -351,11 +341,13 @@
     .form-group{
         margin-left: 20px;
     }
-</style>
-
-<script>
-    function filesUpload() {
-        var fileArr = document.getElementById('photoUploader');
-        console.log(fileArr.files);
+    #CreateBtn {
+        margin-top: 10px;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
     }
-</script>
+
+</style>

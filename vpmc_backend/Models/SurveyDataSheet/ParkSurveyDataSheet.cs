@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -81,5 +82,12 @@ namespace vpmc_backend.Models
         // 現勘照片路徑
         public string TranscriptPath { get; set; }
         public string PhotoPath { get; set; }
+    }
+
+    public class ParkSurveySheetForm : ParkSurveyDataSheet
+    {
+        public IFormFile TranscriptFile { get; set; }
+        public List<IFormFile> SurveyPhoto { get; set; }
+        public string guid { get; set; }
     }
 }

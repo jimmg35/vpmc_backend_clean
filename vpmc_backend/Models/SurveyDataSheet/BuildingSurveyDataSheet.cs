@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace vpmc_backend.Models
 {
@@ -82,4 +83,12 @@ namespace vpmc_backend.Models
         public string TranscriptPath { get; set; }
         public string PhotoPath { get; set; }
     }
+
+    public class BuildingSurveySheetForm : BuildingSurveyDataSheet
+    {
+        public IFormFile TranscriptFile { get; set; }
+        public List<IFormFile> SurveyPhoto { get; set; }
+        public string guid { get; set; }
+    }
+
 }
