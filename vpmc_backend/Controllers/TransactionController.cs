@@ -28,6 +28,21 @@ namespace vpmc_backend.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getExtentData")]
+        public IEnumerable<Deal> Get(int xmin, int xmax, int ymin, int ymax)
+        {
+
+
+            var result = from deal in _context.Deal where 
+                         deal.CoordinateX > xmin && 
+                         deal.CoordinateX < xmax && 
+                         deal.CoordinateY > ymin &&
+                         deal.CoordinateY < ymax select deal;
+            Debug.WriteLine(result.ToList().Count());
+            return result.ToList();
+        }
+
+        [AllowAnonymous]
         [HttpGet("getCommittee")]
         public IEnumerable<string> Get(string county, string town)
         {
