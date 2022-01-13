@@ -32,10 +32,10 @@ namespace vpmc_backend.Controllers
         public IEnumerable<Deal> Get(int xmin, int xmax, int ymin, int ymax)
         {
             var result = from deal in _context.Deal where 
-                         deal.CoordinateX > xmin && 
-                         deal.CoordinateX < xmax && 
-                         deal.CoordinateY > ymin &&
-                         deal.CoordinateY < ymax select deal;
+                         deal.CoordinateX > ymin && 
+                         deal.CoordinateX < ymax && 
+                         deal.CoordinateY > xmin &&
+                         deal.CoordinateY < xmax select deal;
             return result.ToList();
         }
 
