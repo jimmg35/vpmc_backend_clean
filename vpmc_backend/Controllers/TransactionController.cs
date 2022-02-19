@@ -57,7 +57,7 @@ namespace vpmc_backend.Controllers
                 select new CommitteeHistory{
                         transactionDate = deal.TransactionDate,
                         transferLevel = deal.ParsedShiftingLevel,
-                        units = deal.TotalFloorArea,
+                        units = deal.BuildingShiftingArea,
                         totalPrice = deal.TotalPrice,
                         unitPrice = deal.UnitPrice,
                         bathNumber = deal.BathNumber,
@@ -122,7 +122,7 @@ namespace vpmc_backend.Controllers
     {
         public string transactionDate { get; set; }
         public int? transferLevel { get; set; }
-        public string units { get; set; }
+        public float? units { get; set; }
         public long? totalPrice { get; set; }
         public float? unitPrice { get; set; }
         public long? bathNumber { get; set; }
