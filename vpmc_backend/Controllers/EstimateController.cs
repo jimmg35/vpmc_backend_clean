@@ -35,7 +35,7 @@ namespace vpmc_backend.Controllers
                 {
                     transactionSerialNumber = x.Id,
                     date = DateTime.Parse(x.CompletionDate),
-                    area = double.Parse(x.SiteArea.Substring(0,x.SiteArea.Length-2)) / 3.3058,
+                    area = x.BuildingShiftingArea,
                     age = DateTime.Now.Year - DateTime.Parse(x.CompletionDate).Year
                 }).ToList();
 
