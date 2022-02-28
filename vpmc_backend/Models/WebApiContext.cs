@@ -70,5 +70,13 @@ namespace vpmc_backend.Models
 
         //表單元件
         public DbSet<Administrative_Area> Administrative_Area { get; set; }
+
+        //忽略
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Ignore<BuildingSurveySheetForm>();
+            modelBuilder.Ignore<LandSurveySheetForm>();
+            modelBuilder.Ignore<ParkSurveySheetForm>();
+        }
     }
 }

@@ -18,10 +18,10 @@
             @Html.DisplayFor(model => model.UserId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AssetType)
+            @Html.DisplayNameFor(model => model.AssetTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AssetType.Id)
+            @Html.DisplayFor(model => model.AssetType.Type)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LandMarkCounty)
@@ -96,16 +96,16 @@
             @Html.DisplayFor(model => model.ParkArea)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParkType)
+            @Html.DisplayNameFor(model => model.ParkTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParkType.Id)
+            @Html.DisplayFor(model => model.ParkType.Type)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParkMethod)
+            @Html.DisplayNameFor(model => model.ParkMethodId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParkMethod.Id)
+            @Html.DisplayFor(model => model.ParkMethod.Method)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LandRightsOwner)
@@ -114,10 +114,10 @@
             @Html.DisplayFor(model => model.LandRightsOwner)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LandRightsStatus)
+            @Html.DisplayNameFor(model => model.LandRightsStatusId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LandRightsStatus.Id)
+            @Html.DisplayFor(model => model.LandRightsStatus.Status)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LandRightsHolding)
@@ -132,10 +132,10 @@
             @Html.DisplayFor(model => model.BuildingRightsOwner)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BuildingRightsStatus)
+            @Html.DisplayNameFor(model => model.BuildingRightsStatusId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuildingRightsStatus.Id)
+            @Html.DisplayFor(model => model.BuildingRightsStatus.Status)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BuildingRightsHolding)
@@ -150,10 +150,10 @@
             @Html.DisplayFor(model => model.OtherRights)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AssignMethod)
+            @Html.DisplayNameFor(model => model.AssignMethodId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AssignMethod.Id)
+            @Html.DisplayFor(model => model.AssignMethod.Method)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LandUses)
@@ -174,16 +174,16 @@
             @Html.DisplayFor(model => model.FloorAreaRatio)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BuildingUsage)
+            @Html.DisplayNameFor(model => model.BuildingUsageId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuildingUsage.Id)
+            @Html.DisplayFor(model => model.BuildingUsage.Usage)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BuildingStructure)
+            @Html.DisplayNameFor(model => model.BuildingStructureId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuildingStructure.Id)
+            @Html.DisplayFor(model => model.BuildingStructure.Structure)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BuildingFinishDate)
@@ -240,10 +240,10 @@
             @Html.DisplayFor(model => model.ValueOpinionDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AppraisalObject)
+            @Html.DisplayNameFor(model => model.AppraisalObjectId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AppraisalObject.Id)
+            @Html.DisplayFor(model => model.AppraisalObject.Object)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AppraisalDescription)
@@ -252,16 +252,16 @@
             @Html.DisplayFor(model => model.AppraisalDescription)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PriceType)
+            @Html.DisplayNameFor(model => model.PriceTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PriceType.Id)
+            @Html.DisplayFor(model => model.PriceType.Type)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EvaluationRightsType)
+            @Html.DisplayNameFor(model => model.EvaluationRightsTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EvaluationRightsType.Id)
+            @Html.DisplayFor(model => model.EvaluationRightsType.Type)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AppraisalCondition)
@@ -296,6 +296,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">編輯</a> |
+    <a asp-action="Index">返回列表</a>
 </div>
