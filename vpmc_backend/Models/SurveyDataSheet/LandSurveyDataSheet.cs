@@ -68,5 +68,49 @@ namespace vpmc_backend.Models
         public IFormFile TranscriptFile { get; set; }
         public List<IFormFile> SurveyPhoto { get; set; }
         public string guid { get; set; }
+        public LandSurveySheetForm convert(LandSurveyDataSheet sheet)
+        {
+            LandSurveySheetForm form = new LandSurveySheetForm();
+
+            form.AppraisalCondition = sheet.AppraisalCondition;
+            form.AppraisalDescription = sheet.AppraisalDescription;
+            form.AppraisalObject = sheet.AppraisalObject;
+            form.AppraisalObjectId = sheet.AppraisalObjectId;
+            form.AssetType = sheet.AssetType;
+            form.AssetTypeId = sheet.AssetTypeId;
+            form.BuildAddress = sheet.BuildAddress;
+            form.BuildAddressCounty = sheet.BuildAddressCounty;
+            form.BuildAddressVillage = sheet.BuildAddressVillage;
+            form.BuildingCoverageRatio = sheet.BuildingCoverageRatio;
+            form.BuildMarkCode = sheet.BuildMarkCode;
+            form.BuildMarkCounty = sheet.BuildMarkCounty;
+            form.BuildMarkName = sheet.BuildMarkName;
+            form.BuildMarkVillage = sheet.BuildMarkVillage;
+            form.EvaluationRightsType = sheet.EvaluationRightsType;
+            form.EvaluationRightsTypeId = sheet.EvaluationRightsTypeId;
+            form.FloorAreaRatio = sheet.FloorAreaRatio;
+            form.Id = sheet.Id;
+            form.InspectionDate = sheet.InspectionDate;
+            form.LandArea = sheet.LandArea;
+            form.LandMarkCode = sheet.LandMarkCode;
+            form.LandMarkCounty = sheet.LandMarkCounty;
+            form.LandMarkName = sheet.LandMarkName;
+            form.LandMarkVillage = sheet.LandMarkVillage;
+            form.LandRightsHolding = sheet.LandRightsHolding;
+            form.LandRightsOwner = sheet.LandRightsOwner;
+            form.LandRightsStatus = sheet.LandRightsStatus;
+            form.LandRightsStatusId = sheet.LandRightsStatusId;
+            form.LandUses = sheet.LandUses;
+            form.OtherRights = sheet.OtherRights;
+            form.PhotoPath = sheet.PhotoPath;
+            form.PriceType = sheet.PriceType;
+            form.PriceTypeId = sheet.PriceTypeId;
+            form.SurveyDescription = sheet.SurveyDescription;
+            form.SurveyorName = sheet.SurveyorName;
+            form.TranscriptPath = sheet.TranscriptPath;
+            form.UserId = sheet.UserId;
+
+            return form;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<vpmc_backend.Models.LandSurveyDataSheet>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>土地現勘資料表</title>
 </head>
 <body>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">新增</a>
 </p>
 <table class="table">
     <thead>
@@ -217,9 +217,9 @@
                 @Html.DisplayFor(modelItem => item.PhotoPath)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">查看</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
             </td>
         </tr>
 }

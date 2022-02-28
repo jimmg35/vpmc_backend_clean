@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using System.Reflection;
 
 namespace vpmc_backend.Models
 {
@@ -89,6 +90,63 @@ namespace vpmc_backend.Models
         public IFormFile TranscriptFile { get; set; }
         public List<IFormFile> SurveyPhoto { get; set; }
         public string guid { get; set; }
+
+        public BuildingSurveySheetForm convert(BuildingSurveyDataSheet sheet)
+        {
+            BuildingSurveySheetForm form = new BuildingSurveySheetForm();
+            form.AppraisalCondition = sheet.AppraisalCondition;
+            form.AppraisalDescription = sheet.AppraisalDescription;
+            form.AppraisalObject = sheet.AppraisalObject;
+            form.AppraisalObjectId = sheet.AppraisalObjectId;
+            form.AssetType = sheet.AssetType;
+            form.AssetTypeId = sheet.AssetTypeId;
+            form.BuildAddress = sheet.BuildAddress;
+            form.BuildAddressCounty = sheet.BuildAddressCounty;
+            form.BuildAddressVillage = sheet.BuildAddressVillage;
+            form.BuildingArea = sheet.BuildingArea;
+            form.BuildingCoverageRatio = sheet.BuildingCoverageRatio;
+            form.BuildingDownFloor = sheet.BuildingDownFloor;
+            form.BuildingFinishDate = sheet.BuildingFinishDate;
+            form.BuildingRightsHolding = sheet.BuildingRightsHolding;
+            form.BuildingRightsOwner = sheet.BuildingRightsOwner;
+            form.BuildingRightsStatus = sheet.BuildingRightsStatus;
+            form.BuildingRightsStatusId = sheet.BuildingRightsStatusId;
+            form.BuildingStructure = sheet.BuildingStructure;
+            form.BuildingStructureId = sheet.BuildingStructureId;
+            form.BuildingUpFloor = sheet.BuildingUpFloor;
+            form.BuildingUsage = sheet.BuildingUsage;
+            form.BuildingUsageId = sheet.BuildingUsageId;
+            form.BuildMarkCode = sheet.BuildMarkCode;
+            form.BuildMarkCounty = sheet.BuildMarkCounty;
+            form.BuildMarkName = sheet.BuildMarkName;
+            form.BuildMarkVillage = sheet.BuildMarkVillage;
+            form.EvaluationRightsType = sheet.EvaluationRightsType;
+            form.EvaluationRightsTypeId = sheet.EvaluationRightsTypeId;
+            form.FloorAreaRatio = sheet.FloorAreaRatio;
+            form.Id = sheet.Id;
+            form.InspectionDate = sheet.InspectionDate;
+            form.LandArea = sheet.LandArea;
+            form.LandMarkCode = sheet.LandMarkCode;
+            form.LandMarkCounty = sheet.LandMarkCounty;
+            form.LandMarkName = sheet.LandMarkName;
+            form.LandMarkVillage = sheet.LandMarkVillage;
+            form.LandRightsHolding = sheet.LandRightsHolding;
+            form.LandRightsOwner = sheet.LandRightsOwner;
+            form.LandRightsStatus = sheet.LandRightsStatus;
+            form.LandRightsStatusId = sheet.LandRightsStatusId;
+            form.LandUses = sheet.LandUses;
+            form.OtherRights = sheet.OtherRights;
+            form.PhotoPath = sheet.PhotoPath;
+            form.PriceType = sheet.PriceType;
+            form.PriceTypeId = sheet.PriceTypeId;
+            form.SurveyDescription = sheet.SurveyDescription;
+            form.SurveyFloor = sheet.SurveyFloor;
+            form.SurveyorName = sheet.SurveyorName;
+            form.TranscriptPath = sheet.TranscriptPath;
+            form.UserId = sheet.UserId;
+
+            return form;
+        }
     }
 
 }
