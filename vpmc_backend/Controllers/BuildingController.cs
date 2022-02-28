@@ -205,15 +205,24 @@ namespace vpmc_backend.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppraisalObjectId"] = new SelectList(_context.Building_AppraisalObject, "Id", "Id", buildingSurveyDataSheet.AppraisalObjectId);
-            ViewData["AssetTypeId"] = new SelectList(_context.Building_AssetType, "Id", "Id", buildingSurveyDataSheet.AssetTypeId);
-            ViewData["BuildingRightsStatusId"] = new SelectList(_context.Building_BuildingRightsStatus, "Id", "Id", buildingSurveyDataSheet.BuildingRightsStatusId);
-            ViewData["BuildingStructureId"] = new SelectList(_context.Building_BuildingStructure, "Id", "Id", buildingSurveyDataSheet.BuildingStructureId);
-            ViewData["BuildingUsageId"] = new SelectList(_context.Building_BuildingUsage, "Id", "Id", buildingSurveyDataSheet.BuildingUsageId);
-            ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Building_EvaluationRightsType, "Id", "Id", buildingSurveyDataSheet.EvaluationRightsTypeId);
-            ViewData["LandRightsStatusId"] = new SelectList(_context.Building_LandRightsStatus, "Id", "Id", buildingSurveyDataSheet.LandRightsStatusId);
-            ViewData["PriceTypeId"] = new SelectList(_context.Building_PriceType, "Id", "Id", buildingSurveyDataSheet.PriceTypeId);
-            return View(buildingSurveyDataSheet);
+
+            var form = new BuildingSurveySheetForm().convert(buildingSurveyDataSheet);
+
+            //登入使用者，取得使用者ID
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                ViewData["UserId"] = _userManager.GetUserId(User);
+            }
+
+            var countyList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName }).Distinct();
+
+            ViewData["County"] = new SelectList(countyList, "CountyName", "CountyName", "臺北市");
+
+            var TownList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName, TownName = x.TownName }).Where(x => x.CountyName == "臺北市").Distinct();
+            ViewData["Town"] = new SelectList(TownList, "TownName", "TownName", "中正區");
+
+            return View(form);
         }
 
         // POST: BuildingSurveyDataSheets/Edit/5
@@ -221,18 +230,56 @@ namespace vpmc_backend.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,LandArea,BuildingArea,LandRightsOwner,LandRightsStatusId,LandRightsHolding,BuildingRightsOwner,BuildingRightsStatusId,BuildingRightsHolding,OtherRights,LandUses,BuildingCoverageRatio,FloorAreaRatio,BuildingUsageId,BuildingStructureId,BuildingFinishDate,BuildingUpFloor,BuildingDownFloor,SurveyFloor,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptPath,PhotoPath")] BuildingSurveyDataSheet buildingSurveyDataSheet)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,LandArea,BuildingArea,LandRightsOwner,LandRightsStatusId,LandRightsHolding,BuildingRightsOwner,BuildingRightsStatusId,BuildingRightsHolding,OtherRights,LandUses,BuildingCoverageRatio,FloorAreaRatio,BuildingUsageId,BuildingStructureId,BuildingFinishDate,BuildingUpFloor,BuildingDownFloor,SurveyFloor,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptFile,SurveyPhoto")] BuildingSurveySheetForm buildingSurveyDataSheet)
         {
             if (id != buildingSurveyDataSheet.Id)
             {
                 return NotFound();
             }
 
+            // 檢查檔案是否上傳
+            if (_fileChecking(buildingSurveyDataSheet))
+            {
+                // 檢查上傳路徑是否存在
+                if (!Directory.Exists(_buildingSDS_path))
+                {
+                    Directory.CreateDirectory(_buildingSDS_path);
+                }
+
+                // 上傳檔案
+                string[] filePathMeta = _uploadFiles(_buildingSDS_path, buildingSurveyDataSheet);
+
+                buildingSurveyDataSheet.TranscriptPath = filePathMeta[0];
+                buildingSurveyDataSheet.PhotoPath = filePathMeta[1];
+            }
+
+            //
+            // 新增現勘資料表進資料庫
+            //
+            BuildingAssetType assetType = _context.Building_AssetType.Single(a => a.Id == buildingSurveyDataSheet.AssetTypeId);
+            BuildingLandRightsStatus landRightStatus = _context.Building_LandRightsStatus.Single(l => l.Id == buildingSurveyDataSheet.LandRightsStatusId);
+            BuildingBuildingRightsStatus buildingRightStatus = _context.Building_BuildingRightsStatus.Single(b => b.Id == buildingSurveyDataSheet.BuildingRightsStatusId);
+            BuildingBuildingUsage buildingUsage = _context.Building_BuildingUsage.Single(b => b.Id == buildingSurveyDataSheet.BuildingUsageId);
+            BuildingBuildingStructure buildingStructure = _context.Building_BuildingStructure.Single(b => b.Id == buildingSurveyDataSheet.BuildingStructureId);
+            BuildingAppraisalObject appraisalObject = _context.Building_AppraisalObject.Single(a => a.Id == buildingSurveyDataSheet.AppraisalObjectId);
+            BuildingPriceType priveType = _context.Building_PriceType.Single(p => p.Id == buildingSurveyDataSheet.PriceTypeId);
+            BuildingEvaluationRightsType evaluationRightsType = _context.Building_EvaluationRightsType.Single(e => e.Id == buildingSurveyDataSheet.EvaluationRightsTypeId);
+
+            buildingSurveyDataSheet.AssetType = assetType;
+            buildingSurveyDataSheet.LandRightsStatus = landRightStatus;
+            buildingSurveyDataSheet.BuildingRightsStatus = buildingRightStatus;
+            buildingSurveyDataSheet.BuildingUsage = buildingUsage;
+            buildingSurveyDataSheet.BuildingStructure = buildingStructure;
+            buildingSurveyDataSheet.AppraisalObject = appraisalObject;
+            buildingSurveyDataSheet.PriceType = priveType;
+            buildingSurveyDataSheet.EvaluationRightsType = evaluationRightsType;
+
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(buildingSurveyDataSheet);
+                    _context.Update((BuildingSurveyDataSheet)buildingSurveyDataSheet);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -248,15 +295,7 @@ namespace vpmc_backend.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppraisalObjectId"] = new SelectList(_context.Building_AppraisalObject, "Id", "Id", buildingSurveyDataSheet.AppraisalObjectId);
-            ViewData["AssetTypeId"] = new SelectList(_context.Building_AssetType, "Id", "Id", buildingSurveyDataSheet.AssetTypeId);
-            ViewData["BuildingRightsStatusId"] = new SelectList(_context.Building_BuildingRightsStatus, "Id", "Id", buildingSurveyDataSheet.BuildingRightsStatusId);
-            ViewData["BuildingStructureId"] = new SelectList(_context.Building_BuildingStructure, "Id", "Id", buildingSurveyDataSheet.BuildingStructureId);
-            ViewData["BuildingUsageId"] = new SelectList(_context.Building_BuildingUsage, "Id", "Id", buildingSurveyDataSheet.BuildingUsageId);
-            ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Building_EvaluationRightsType, "Id", "Id", buildingSurveyDataSheet.EvaluationRightsTypeId);
-            ViewData["LandRightsStatusId"] = new SelectList(_context.Building_LandRightsStatus, "Id", "Id", buildingSurveyDataSheet.LandRightsStatusId);
-            ViewData["PriceTypeId"] = new SelectList(_context.Building_PriceType, "Id", "Id", buildingSurveyDataSheet.PriceTypeId);
-            return View(buildingSurveyDataSheet);
+            return View((BuildingSurveyDataSheet)buildingSurveyDataSheet);
         }
 
         // GET: BuildingSurveyDataSheets/Delete/5
