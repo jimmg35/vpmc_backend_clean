@@ -88,6 +88,33 @@ namespace vpmc_backend.Controllers
         public async Task<IActionResult> Index()
         {
             var webApiContext = _context.ParkSurveyDataSheet.Include(p => p.AppraisalObject).Include(p => p.AssetType).Include(p => p.AssignMethod).Include(p => p.BuildingRightsStatus).Include(p => p.BuildingStructure).Include(p => p.BuildingUsage).Include(p => p.EvaluationRightsType).Include(p => p.LandRightsStatus).Include(p => p.ParkMethod).Include(p => p.ParkType).Include(p => p.PriceType);
+
+            foreach (var item in webApiContext)
+            {
+                if (item.TranscriptPath != null)
+                {
+                    if (item.TranscriptPath.Split("wwwroot").Count() > 1)
+                    {
+                        item.TranscriptPath = item.TranscriptPath.Split("wwwroot")[1];
+                    }
+                }
+
+                if (item.PhotoPath != null)
+                {
+                    if (item.PhotoPath.Split('|').Count()>1)
+                    {
+                        var paths = item.PhotoPath.Split('|').SkipLast(1).ToList();
+                        var new_paths = new List<string>();
+                        foreach (var img in paths)
+                        {
+                            new_paths.Add(img.Split("wwwroot")[1]);
+                        }
+                        item.PhotoPath = string.Join('|', new_paths);
+                    }
+                }
+
+            }
+
             return View(await webApiContext.ToListAsync());
         }
 
@@ -116,6 +143,30 @@ namespace vpmc_backend.Controllers
             {
                 return NotFound();
             }
+
+            string fileRelative = "";
+            if (parkSurveyDataSheet.TranscriptPath != null)
+            {
+                var file = parkSurveyDataSheet.TranscriptPath;
+                if (file.Split("wwwroot").Count()>1)
+                {
+                   fileRelative = file.Split("wwwroot")[1];
+                }
+            }
+
+            List<string> imageList_Relative = new List<string>();
+            if (parkSurveyDataSheet.PhotoPath != null)
+            {
+                var imageList = parkSurveyDataSheet.PhotoPath.Split('|').SkipLast(1).ToList();
+                foreach (var im in imageList)
+                {
+                    imageList_Relative.Add(im.Split("wwwroot")[1]);
+                }
+            }
+
+
+            ViewBag.FilePath = fileRelative;
+            ViewBag.ImageList = imageList_Relative;
 
             return View(parkSurveyDataSheet);
         }
@@ -233,6 +284,9 @@ namespace vpmc_backend.Controllers
 
             var TownList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName, TownName = x.TownName }).Where(x => x.CountyName == "臺北市").Distinct();
             ViewData["Town"] = new SelectList(TownList, "TownName", "TownName", "中正區");
+
+            ViewData["Transcript"] = parkSurveyDataSheet.TranscriptPath;
+            ViewData["Photos"] = parkSurveyDataSheet.PhotoPath;
 
             return View(form);
         }
