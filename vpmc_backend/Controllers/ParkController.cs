@@ -285,8 +285,8 @@ namespace vpmc_backend.Controllers
             var TownList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName, TownName = x.TownName }).Where(x => x.CountyName == "臺北市").Distinct();
             ViewData["Town"] = new SelectList(TownList, "TownName", "TownName", "中正區");
 
-            ViewData["Transcript"] = buildingSurveyDataSheet.TranscriptPath;
-            ViewData["Photos"] = buildingSurveyDataSheet.PhotoPath;
+            ViewData["Transcript"] = parkSurveyDataSheet.TranscriptPath;
+            ViewData["Photos"] = parkSurveyDataSheet.PhotoPath;
 
             return View(form);
         }
