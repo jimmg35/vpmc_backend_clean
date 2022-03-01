@@ -8,6 +8,7 @@
     <title>土地現勘資料表</title>
 </head>
 <body>
+<h1>土地現勘資料表</h1>
 <p>
     <a asp-action="Create">新增</a>
 </p>
@@ -207,10 +208,13 @@
                 @Html.DisplayFor(modelItem => item.SurveyDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TranscriptPath)
+                <a href="@Html.ValueFor(modelItem=>item.TranscriptPath)">@Html.DisplayFor(modelItem => item.TranscriptPath)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotoPath)
+                @foreach (var path in Model.Select(x => x.PhotoPath).First().Split('|'))
+                {
+                    <img src="@path" width="300" height="auto" />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |

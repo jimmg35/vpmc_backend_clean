@@ -254,14 +254,17 @@
             @Html.DisplayNameFor(model => model.TranscriptPath)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TranscriptPath)
+            <a href="@ViewBag.FilePath" download>@ViewBag.FilePath</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PhotoPath)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhotoPath)
-        </dd>
+
+        @foreach (var item in ViewBag.ImageList)
+	    {
+		    <dd><img src="@item" alt="@item" width="30%" height="auto"></dd>
+	    }
+
     </dl>
 </div>
 <div>

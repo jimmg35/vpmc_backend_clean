@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <h3>步驟一：載入勘估標的土地/建物謄本</h3>
             <input id="Transcripts" type="file" asp-for="TranscriptFile" class="form-control"/>
-            <input type="hidden" asp-for="TranscriptPath"/>
+            <input type="hidden" asp-for="TranscriptPath" value=@ViewData["Transcript"]/>
             <h3>步驟二：輸入勘估標的基本資料</h3>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -236,7 +236,7 @@
             <div class="form-group">
                 <label asp-for="PhotoPath" class="control-label">3.現勘照片：</label>
                 <input type="file" multiple asp-for="SurveyPhoto" class="form-control"/>
-                <input type="hidden" multiple asp-for="PhotoPath" class="form-control" /> 
+                <input type="hidden" multiple asp-for="PhotoPath" class="form-control" value=@ViewData["Photos"]/> 
                 <span asp-validation-for="PhotoPath" class="text-danger"></span>
             </div>
             <div class="form-group">
