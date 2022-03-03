@@ -1,7 +1,7 @@
-﻿@model vpmc_backend.Models.LandSurveyDataSheet
+﻿@model vpmc_backend.Models.LandSurveySheetForm
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -13,182 +13,194 @@
 </head>
 <body>
 
-<h4>LandSurveyDataSheet</h4>
+@*<h4>LandSurveyDataSheet</h4>*@
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h3>步驟一：載入勘估標的土地/建物謄本</h3>
+            <input id="Transcripts" type="file" asp-for="TranscriptFile" class="form-control"/>
+            <input type="hidden" asp-for="TranscriptPath" value=@ViewData["Transcript"]/>
+            <h3>步驟二：輸入勘估標的基本資料</h3>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
+                <input type="hidden" asp-for="UserId" class="form-control" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
+                        <h4>一、標的內容</h4>
             <div class="form-group">
-                <label asp-for="AssetTypeId" class="control-label"></label>
-                <select asp-for="AssetTypeId" class="form-control" asp-items="ViewBag.AssetTypeId"></select>
-                <span asp-validation-for="AssetTypeId" class="text-danger"></span>
+                <label asp-for="AssetTypeId" class="control-label">1.資產類型：</label>
+                <input type="radio" asp-for="AssetTypeId" class="form-control" value="1" />土地
+                <input type="radio" asp-for="AssetTypeId" class="form-control" value="2" checked/>建物
+                <input type="radio" asp-for="AssetTypeId" class="form-control" value="3" />車位
             </div>
             <div class="form-group">
-                <label asp-for="LandMarkCounty" class="control-label"></label>
-                <input asp-for="LandMarkCounty" class="form-control" />
+                <label class="control-label">2.土地標示：</label>
+                <select asp-for="LandMarkCounty" id="LandMarkCounty" class="form-control" asp-items="ViewBag.County"></select>
                 <span asp-validation-for="LandMarkCounty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LandMarkVillage" class="control-label"></label>
-                <input asp-for="LandMarkVillage" class="form-control" />
+                <select asp-for="LandMarkVillage" id="LandMarkVillage" class="form-control" asp-items="ViewBag.Town"></select>
                 <span asp-validation-for="LandMarkVillage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LandMarkName" class="control-label"></label>
+                <label class="control-label">段小段：</label>
                 <input asp-for="LandMarkName" class="form-control" />
                 <span asp-validation-for="LandMarkName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LandMarkCode" class="control-label"></label>
                 <input asp-for="LandMarkCode" class="form-control" />
                 <span asp-validation-for="LandMarkCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BuildMarkCounty" class="control-label"></label>
-                <input asp-for="BuildMarkCounty" class="form-control" />
+                <label class="control-label">3.建物標示：</label>
+                @*<input asp-for="BuildMarkCounty" class="form-control" />*@
+                <select asp-for="BuildMarkCounty" id="BuildMarkCounty" class="form-control" asp-items="ViewBag.County"></select>
                 <span asp-validation-for="BuildMarkCounty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BuildMarkVillage" class="control-label"></label>
-                <input asp-for="BuildMarkVillage" class="form-control" />
+                @*<input asp-for="BuildMarkVillage" class="form-control" />*@
+                <select asp-for="BuildMarkVillage" id="BuildMarkVillage" class="form-control" asp-items="ViewBag.Town"></select>
                 <span asp-validation-for="BuildMarkVillage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BuildMarkName" class="control-label"></label>
+                <label class="control-label">段小段：</label>
                 <input asp-for="BuildMarkName" class="form-control" />
                 <span asp-validation-for="BuildMarkName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BuildMarkCode" class="control-label"></label>
                 <input asp-for="BuildMarkCode" class="form-control" />
                 <span asp-validation-for="BuildMarkCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BuildAddressCounty" class="control-label"></label>
-                <input asp-for="BuildAddressCounty" class="form-control" />
-                <span asp-validation-for="BuildAddressCounty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BuildAddressVillage" class="control-label"></label>
-                <input asp-for="BuildAddressVillage" class="form-control" />
-                <span asp-validation-for="BuildAddressVillage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BuildAddress" class="control-label"></label>
+                <label asp-for="BuildAddress" class="control-label">4.建物門牌：</label>
+                <select asp-for="BuildAddressCounty" id="BuildAddressCounty" class="form-control" asp-items="ViewBag.County"></select>
+                <select asp-for="BuildAddressVillage" id="BuildAddressVillage" class="form-control" asp-items="ViewBag.Town"></select>
                 <input asp-for="BuildAddress" class="form-control" />
                 <span asp-validation-for="BuildAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LandArea" class="control-label"></label>
-                <input asp-for="LandArea" class="form-control" />
+                <label asp-for="LandArea" class="control-label">5.土地面積：</label>
+                <input type="number" step="0.01" asp-for="LandArea" class="form-control" />
                 <span asp-validation-for="LandArea" class="text-danger"></span>
             </div>
+            <h4>二、產權分析 </h4>
             <div class="form-group">
-                <label asp-for="LandRightsOwner" class="control-label"></label>
+                <label asp-for="LandRightsOwner" class="control-label">1.土地所有權人及權利範圍：</label>
                 <input asp-for="LandRightsOwner" class="form-control" />
                 <span asp-validation-for="LandRightsOwner" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LandRightsStatusId" class="control-label"></label>
-                <select asp-for="LandRightsStatusId" class="form-control" asp-items="ViewBag.LandRightsStatusId"></select>
-                <span asp-validation-for="LandRightsStatusId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LandRightsHolding" class="control-label"></label>
+                <input type="radio" asp-for="LandRightsStatusId" class="form-control" value="1" checked/>名下全部
+                <input type="radio" asp-for="LandRightsStatusId" class="form-control" value="2" />持分產權
                 <input asp-for="LandRightsHolding" class="form-control" />
                 <span asp-validation-for="LandRightsHolding" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OtherRights" class="control-label"></label>
+                <label asp-for="OtherRights" class="control-label">2.他項權利</label>
                 <input asp-for="OtherRights" class="form-control" />
                 <span asp-validation-for="OtherRights" class="text-danger"></span>
             </div>
+            <h4>三、使用現況</h4>
             <div class="form-group">
-                <label asp-for="LandUses" class="control-label"></label>
-                <input asp-for="LandUses" class="form-control" />
-                <span asp-validation-for="LandUses" class="text-danger"></span>
+                <label asp-for="LandUses" class="control-label">1.使用分區</label>
+                <input type="radio" asp-for="LandUses" class="form-control" value="1" checked/>都市土地
+                <input type="radio" asp-for="LandUses" class="form-control" value="2" />非都市土地
             </div>
             <div class="form-group">
-                <label asp-for="BuildingCoverageRatio" class="control-label"></label>
-                <input asp-for="BuildingCoverageRatio" class="form-control" />
+                <label class="control-label">2.使用強度：</label>
+                <label asp-for="BuildingCoverageRatio" class="control-label">法定建蔽率：</label>
+                <input type="number" step="0.1" asp-for="BuildingCoverageRatio" class="form-control" />
                 <span asp-validation-for="BuildingCoverageRatio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FloorAreaRatio" class="control-label"></label>
-                <input asp-for="FloorAreaRatio" class="form-control" />
+                <label asp-for="FloorAreaRatio" class="control-label">法定容積率：</label>
+                <input type="number" step="0.1" asp-for="FloorAreaRatio" class="form-control" />
                 <span asp-validation-for="FloorAreaRatio" class="text-danger"></span>
             </div>
+            <h4>四、勘查日期及價格日期</h4>
             <div class="form-group">
-                <label asp-for="InspectionDate" class="control-label"></label>
-                <input asp-for="InspectionDate" class="form-control" />
+                <label asp-for="InspectionDate" class="control-label">1.勘查日期：</label>
+                <input type="date" asp-for="InspectionDate" class="form-control" />
                 <span asp-validation-for="InspectionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ValueOpinionDate" class="control-label"></label>
-                <input asp-for="ValueOpinionDate" class="form-control" />
+                <label asp-for="ValueOpinionDate" class="control-label">2.價格日期：</label>
+                <input type="date" asp-for="ValueOpinionDate" class="form-control" />
                 <span asp-validation-for="ValueOpinionDate" class="text-danger"></span>
-            </div>
+            </div>  
+            <h4>五、估價目的</h4>
             <div class="form-group">
-                <label asp-for="AppraisalObjectId" class="control-label"></label>
-                <select asp-for="AppraisalObjectId" class="form-control" asp-items="ViewBag.AppraisalObjectId"></select>
-                <span asp-validation-for="AppraisalObjectId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AppraisalDescription" class="control-label"></label>
+                @*<label asp-for="AppraisalObjectId" class="control-label">估價目的</label>*@
+                @{
+                    SelectList AppraisalObjectList = new SelectList(new List<SelectListItem> {
+                        new SelectListItem{ Text = "資產價值證明", Value="1"},
+                        new SelectListItem{ Text = "金融機構貸款", Value="2"},
+                        new SelectListItem{ Text = "市場交易參考", Value="3"},
+                        new SelectListItem{ Text = "會計帳資產重估", Value="4"},
+                        new SelectListItem{ Text = "公司股東參考", Value="5"},
+                        new SelectListItem{ Text = "法院拍賣參考", Value="6"},
+                        new SelectListItem{ Text = "法院訴訟", Value="7"},
+                        new SelectListItem{ Text = "經銷商抵押設定", Value="8"},
+                        new SelectListItem{ Text = "徵收補償評估", Value="9"},
+                        new SelectListItem{ Text = "其他", Value="10"},
+                    }, "Value", "Text");
+                }
+                @Html.DropDownListFor(m => m.AppraisalObjectId, AppraisalObjectList)
                 <input asp-for="AppraisalDescription" class="form-control" />
                 <span asp-validation-for="AppraisalDescription" class="text-danger"></span>
+                @*<select asp-for="AppraisalObjectId" class="form-control" asp-items="ViewBag.AppraisalObjectId"></select>*@
+            </div>
+            <h4>六、價格種類及估價條件</h4>
+            <div class="form-group">
+                <label asp-for="PriceTypeId" class="control-label">1.價格種類：</label>
+                @{
+                    SelectList PriceTypeList = new SelectList(new List<SelectListItem> {
+                            new SelectListItem{ Text = "正常價格", Value="1"},
+                            new SelectListItem{ Text = "限定價格", Value="2"},
+                            new SelectListItem{ Text = "特定價格", Value="3"},
+                            new SelectListItem{ Text = "特殊價格", Value="4"},
+                            new SelectListItem{ Text = "正常租金", Value="5"},
+                            new SelectListItem{ Text = "限定租金", Value="6"}
+                        }, "Value", "Text");
+                }
+                @Html.DropDownListFor(m => m.PriceTypeId, PriceTypeList)
+                @*<select asp-for="PriceTypeId" class="form-control" asp-items="ViewBag.PriceTypeId"></select>*@
             </div>
             <div class="form-group">
-                <label asp-for="PriceTypeId" class="control-label"></label>
-                <select asp-for="PriceTypeId" class="form-control" asp-items="ViewBag.PriceTypeId"></select>
-                <span asp-validation-for="PriceTypeId" class="text-danger"></span>
+                <label asp-for="EvaluationRightsTypeId" class="control-label">2.評估權利種類：</label>
+                @{
+                    SelectList EvaluationRightsTypeList = new SelectList(new List<SelectListItem> {
+                            new SelectListItem{ Text = "所有權價值評估", Value="1"},
+                            new SelectListItem{ Text = "地上權價值評估", Value="2"},
+                            new SelectListItem{ Text = "租賃權價值評估", Value="3"},
+                            new SelectListItem{ Text = "租金評估", Value="4"}
+                        }, "Value", "Text");
+                }
+                @Html.DropDownListFor(m => m.EvaluationRightsTypeId, EvaluationRightsTypeList)
+                @*<select asp-for="EvaluationRightsTypeId" class="form-control" asp-items="ViewBag.EvaluationRightsTypeId"></select>*@
             </div>
             <div class="form-group">
-                <label asp-for="EvaluationRightsTypeId" class="control-label"></label>
-                <select asp-for="EvaluationRightsTypeId" class="form-control" asp-items="ViewBag.EvaluationRightsTypeId"></select>
-                <span asp-validation-for="EvaluationRightsTypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AppraisalCondition" class="control-label"></label>
+                <label asp-for="AppraisalCondition" class="control-label">3.評價條件：</label>
                 <input asp-for="AppraisalCondition" class="form-control" />
                 <span asp-validation-for="AppraisalCondition" class="text-danger"></span>
             </div>
+            <h4>七、現場勘查情形說明</h4>
             <div class="form-group">
-                <label asp-for="SurveyorName" class="control-label"></label>
+                <label asp-for="SurveyorName" class="control-label">1.勘領人姓名：</label>
                 <input asp-for="SurveyorName" class="form-control" />
                 <span asp-validation-for="SurveyorName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SurveyDescription" class="control-label"></label>
+                <label asp-for="SurveyDescription" class="control-label">2.勘領說明事項：</label>
                 <input asp-for="SurveyDescription" class="form-control" />
                 <span asp-validation-for="SurveyDescription" class="text-danger"></span>
             </div>
-            <div class="form-group">
+@*            <div class="form-group">
                 <label asp-for="TranscriptPath" class="control-label"></label>
                 <input asp-for="TranscriptPath" class="form-control" />
                 <span asp-validation-for="TranscriptPath" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
-                <label asp-for="PhotoPath" class="control-label"></label>
-                <input asp-for="PhotoPath" class="form-control" />
+                <label asp-for="PhotoPath" class="control-label">3.現勘照片：</label>
+                <input type="file" multiple asp-for="SurveyPhoto" class="form-control"/>
+                <input type="hidden" multiple asp-for="PhotoPath" class="form-control" value=@ViewData["Photos"]/> 
                 <span asp-validation-for="PhotoPath" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="儲存" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回列表</a>
 </div>
 
 @section Scripts {

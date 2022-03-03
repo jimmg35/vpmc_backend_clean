@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/vpmc_backend/bin/Release/netcoreapp3.1
+/vpmc_backend/obj/Release/netcoreapp3.1
+/vpmc_backend/Properties/PublishProfiles
+bin/
+obj/
+Debug/
+Release/

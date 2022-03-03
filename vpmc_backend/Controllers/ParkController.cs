@@ -88,6 +88,33 @@ namespace vpmc_backend.Controllers
         public async Task<IActionResult> Index()
         {
             var webApiContext = _context.ParkSurveyDataSheet.Include(p => p.AppraisalObject).Include(p => p.AssetType).Include(p => p.AssignMethod).Include(p => p.BuildingRightsStatus).Include(p => p.BuildingStructure).Include(p => p.BuildingUsage).Include(p => p.EvaluationRightsType).Include(p => p.LandRightsStatus).Include(p => p.ParkMethod).Include(p => p.ParkType).Include(p => p.PriceType);
+
+            foreach (var item in webApiContext)
+            {
+                if (item.TranscriptPath != null)
+                {
+                    if (item.TranscriptPath.Split("wwwroot").Count() > 1)
+                    {
+                        item.TranscriptPath = item.TranscriptPath.Split("wwwroot")[1];
+                    }
+                }
+
+                if (item.PhotoPath != null)
+                {
+                    if (item.PhotoPath.Split('|').Count()>1)
+                    {
+                        var paths = item.PhotoPath.Split('|').SkipLast(1).ToList();
+                        var new_paths = new List<string>();
+                        foreach (var img in paths)
+                        {
+                            new_paths.Add(img.Split("wwwroot")[1]);
+                        }
+                        item.PhotoPath = string.Join('|', new_paths);
+                    }
+                }
+
+            }
+
             return View(await webApiContext.ToListAsync());
         }
 
@@ -116,6 +143,30 @@ namespace vpmc_backend.Controllers
             {
                 return NotFound();
             }
+
+            string fileRelative = "";
+            if (parkSurveyDataSheet.TranscriptPath != null)
+            {
+                var file = parkSurveyDataSheet.TranscriptPath;
+                if (file.Split("wwwroot").Count()>1)
+                {
+                   fileRelative = file.Split("wwwroot")[1];
+                }
+            }
+
+            List<string> imageList_Relative = new List<string>();
+            if (parkSurveyDataSheet.PhotoPath != null)
+            {
+                var imageList = parkSurveyDataSheet.PhotoPath.Split('|').SkipLast(1).ToList();
+                foreach (var im in imageList)
+                {
+                    imageList_Relative.Add(im.Split("wwwroot")[1]);
+                }
+            }
+
+
+            ViewBag.FilePath = fileRelative;
+            ViewBag.ImageList = imageList_Relative;
 
             return View(parkSurveyDataSheet);
         }
@@ -201,17 +252,7 @@ namespace vpmc_backend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["AppraisalObjectId"] = new SelectList(_context.Park_AppraisalObject, "Id", "Id", parkSurveyDataSheet.AppraisalObjectId);
-            //ViewData["AssetTypeId"] = new SelectList(_context.Park_AssetType, "Id", "Id", parkSurveyDataSheet.AssetTypeId);
-            //ViewData["AssignMethodId"] = new SelectList(_context.ParkAssignMethod, "Id", "Id", parkSurveyDataSheet.AssignMethodId);
-            //ViewData["BuildingRightsStatusId"] = new SelectList(_context.Park_BuildingRightsStatus, "Id", "Id", parkSurveyDataSheet.BuildingRightsStatusId);
-            //ViewData["BuildingStructureId"] = new SelectList(_context.Park_BuildingStructure, "Id", "Id", parkSurveyDataSheet.BuildingStructureId);
-            //ViewData["BuildingUsageId"] = new SelectList(_context.Park_BuildingUsage, "Id", "Id", parkSurveyDataSheet.BuildingUsageId);
-            //ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Park_EvaluationRightsType, "Id", "Id", parkSurveyDataSheet.EvaluationRightsTypeId);
-            //ViewData["LandRightsStatusId"] = new SelectList(_context.Park_LandRightsStatus, "Id", "Id", parkSurveyDataSheet.LandRightsStatusId);
-            //ViewData["ParkMethodId"] = new SelectList(_context.ParkMethod, "Id", "Id", parkSurveyDataSheet.ParkMethodId);
-            //ViewData["ParkTypeId"] = new SelectList(_context.ParkType, "Id", "Id", parkSurveyDataSheet.ParkTypeId);
-            //ViewData["PriceTypeId"] = new SelectList(_context.Park_PriceType, "Id", "Id", parkSurveyDataSheet.PriceTypeId);
+
             return View((ParkSurveyDataSheet)parkSurveyDataSheet);
         }
 
@@ -228,18 +269,26 @@ namespace vpmc_backend.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppraisalObjectId"] = new SelectList(_context.Park_AppraisalObject, "Id", "Id", parkSurveyDataSheet.AppraisalObjectId);
-            ViewData["AssetTypeId"] = new SelectList(_context.Park_AssetType, "Id", "Id", parkSurveyDataSheet.AssetTypeId);
-            ViewData["AssignMethodId"] = new SelectList(_context.ParkAssignMethod, "Id", "Id", parkSurveyDataSheet.AssignMethodId);
-            ViewData["BuildingRightsStatusId"] = new SelectList(_context.Park_BuildingRightsStatus, "Id", "Id", parkSurveyDataSheet.BuildingRightsStatusId);
-            ViewData["BuildingStructureId"] = new SelectList(_context.Park_BuildingStructure, "Id", "Id", parkSurveyDataSheet.BuildingStructureId);
-            ViewData["BuildingUsageId"] = new SelectList(_context.Park_BuildingUsage, "Id", "Id", parkSurveyDataSheet.BuildingUsageId);
-            ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Park_EvaluationRightsType, "Id", "Id", parkSurveyDataSheet.EvaluationRightsTypeId);
-            ViewData["LandRightsStatusId"] = new SelectList(_context.Park_LandRightsStatus, "Id", "Id", parkSurveyDataSheet.LandRightsStatusId);
-            ViewData["ParkMethodId"] = new SelectList(_context.ParkMethod, "Id", "Id", parkSurveyDataSheet.ParkMethodId);
-            ViewData["ParkTypeId"] = new SelectList(_context.ParkType, "Id", "Id", parkSurveyDataSheet.ParkTypeId);
-            ViewData["PriceTypeId"] = new SelectList(_context.Park_PriceType, "Id", "Id", parkSurveyDataSheet.PriceTypeId);
-            return View(parkSurveyDataSheet);
+            var form = new ParkSurveySheetForm().convert(parkSurveyDataSheet);
+
+            //登入使用者，取得使用者ID
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                ViewData["UserId"] = _userManager.GetUserId(User);
+            }
+
+            var countyList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName }).Distinct();
+
+            ViewData["County"] = new SelectList(countyList, "CountyName", "CountyName", "臺北市");
+
+            var TownList = _context.Administrative_Area.Select(x => new { CountyName = x.CountyName, TownName = x.TownName }).Where(x => x.CountyName == "臺北市").Distinct();
+            ViewData["Town"] = new SelectList(TownList, "TownName", "TownName", "中正區");
+
+            ViewData["Transcript"] = parkSurveyDataSheet.TranscriptPath;
+            ViewData["Photos"] = parkSurveyDataSheet.PhotoPath;
+
+            return View(form);
         }
 
         // POST: Park/Edit/5
@@ -247,12 +296,56 @@ namespace vpmc_backend.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,ParkArea,ParkTypeId,ParkMethodId,LandRightsOwner,LandRightsStatusId,LandRightsHolding,BuildingRightsOwner,BuildingRightsStatusId,BuildingRightsHolding,OtherRights,AssignMethodId,LandUses,BuildingCoverageRatio,FloorAreaRatio,BuildingUsageId,BuildingStructureId,BuildingFinishDate,BuildingUpFloor,BuildingDownFloor,SurveyFloor,ParkWidth,ParkHeight,AllowSuv,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptPath,PhotoPath")] ParkSurveyDataSheet parkSurveyDataSheet)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,ParkArea,ParkTypeId,ParkMethodId,LandRightsOwner,LandRightsStatusId,LandRightsHolding,BuildingRightsOwner,BuildingRightsStatusId,BuildingRightsHolding,OtherRights,AssignMethodId,LandUses,BuildingCoverageRatio,FloorAreaRatio,BuildingUsageId,BuildingStructureId,BuildingFinishDate,BuildingUpFloor,BuildingDownFloor,SurveyFloor,ParkWidth,ParkHeight,AllowSuv,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptFile,SurveyPhoto")] ParkSurveySheetForm parkSurveyDataSheet)
         {
             if (id != parkSurveyDataSheet.Id)
             {
                 return NotFound();
             }
+
+            // 檢查檔案是否上傳
+            if (_fileChecking(parkSurveyDataSheet))
+            {
+                // 檢查上傳路徑是否存在
+                if (!Directory.Exists(_parkSDS_path))
+                {
+                    Directory.CreateDirectory(_parkSDS_path);
+                }
+
+                // 上傳檔案
+                string[] filePathMeta = _uploadFiles(_parkSDS_path, parkSurveyDataSheet);
+
+                parkSurveyDataSheet.TranscriptPath = filePathMeta[0];
+                parkSurveyDataSheet.PhotoPath = filePathMeta[1];
+            }
+
+
+            //
+            // 新增現勘資料表進資料庫
+            //
+            ParkAssetType assetType = _context.Park_AssetType.Single(a => a.Id == parkSurveyDataSheet.AssetTypeId);
+            ParkLandRightsStatus landRightStatus = _context.Park_LandRightsStatus.Single(l => l.Id == parkSurveyDataSheet.LandRightsStatusId);
+            ParkBuildingRightsStatus buildingRightStatus = _context.Park_BuildingRightsStatus.Single(b => b.Id == parkSurveyDataSheet.BuildingRightsStatusId);
+            ParkBuildingUsage buildingUsage = _context.Park_BuildingUsage.Single(b => b.Id == parkSurveyDataSheet.BuildingUsageId);
+            ParkBuildingStructure buildingStructure = _context.Park_BuildingStructure.Single(b => b.Id == parkSurveyDataSheet.BuildingStructureId);
+            ParkAppraisalObject appraisalObject = _context.Park_AppraisalObject.Single(a => a.Id == parkSurveyDataSheet.AppraisalObjectId);
+            ParkPriceType priveType = _context.Park_PriceType.Single(p => p.Id == parkSurveyDataSheet.PriceTypeId);
+            ParkEvaluationRightsType evaluationRightsType = _context.Park_EvaluationRightsType.Single(e => e.Id == parkSurveyDataSheet.EvaluationRightsTypeId);
+            ParkAssignMethod parkAssignMethod = _context.ParkAssignMethod.Single(a => a.Id == parkSurveyDataSheet.AssignMethodId);
+            ParkMethod parkMethod = _context.ParkMethod.Single(a => a.Id == parkSurveyDataSheet.ParkMethodId);
+            ParkType parkType = _context.ParkType.Single(a => a.Id == parkSurveyDataSheet.ParkTypeId);
+
+            parkSurveyDataSheet.AssetType = assetType;
+            parkSurveyDataSheet.LandRightsStatus = landRightStatus;
+            parkSurveyDataSheet.BuildingRightsStatus = buildingRightStatus;
+            parkSurveyDataSheet.BuildingUsage = buildingUsage;
+            parkSurveyDataSheet.BuildingStructure = buildingStructure;
+            parkSurveyDataSheet.AppraisalObject = appraisalObject;
+            parkSurveyDataSheet.PriceType = priveType;
+            parkSurveyDataSheet.EvaluationRightsType = evaluationRightsType;
+            parkSurveyDataSheet.AssignMethod = parkAssignMethod;
+            parkSurveyDataSheet.ParkMethod = parkMethod;
+            parkSurveyDataSheet.ParkType = parkType;
 
             if (ModelState.IsValid)
             {
@@ -274,18 +367,8 @@ namespace vpmc_backend.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppraisalObjectId"] = new SelectList(_context.Park_AppraisalObject, "Id", "Id", parkSurveyDataSheet.AppraisalObjectId);
-            ViewData["AssetTypeId"] = new SelectList(_context.Park_AssetType, "Id", "Id", parkSurveyDataSheet.AssetTypeId);
-            ViewData["AssignMethodId"] = new SelectList(_context.ParkAssignMethod, "Id", "Id", parkSurveyDataSheet.AssignMethodId);
-            ViewData["BuildingRightsStatusId"] = new SelectList(_context.Park_BuildingRightsStatus, "Id", "Id", parkSurveyDataSheet.BuildingRightsStatusId);
-            ViewData["BuildingStructureId"] = new SelectList(_context.Park_BuildingStructure, "Id", "Id", parkSurveyDataSheet.BuildingStructureId);
-            ViewData["BuildingUsageId"] = new SelectList(_context.Park_BuildingUsage, "Id", "Id", parkSurveyDataSheet.BuildingUsageId);
-            ViewData["EvaluationRightsTypeId"] = new SelectList(_context.Park_EvaluationRightsType, "Id", "Id", parkSurveyDataSheet.EvaluationRightsTypeId);
-            ViewData["LandRightsStatusId"] = new SelectList(_context.Park_LandRightsStatus, "Id", "Id", parkSurveyDataSheet.LandRightsStatusId);
-            ViewData["ParkMethodId"] = new SelectList(_context.ParkMethod, "Id", "Id", parkSurveyDataSheet.ParkMethodId);
-            ViewData["ParkTypeId"] = new SelectList(_context.ParkType, "Id", "Id", parkSurveyDataSheet.ParkTypeId);
-            ViewData["PriceTypeId"] = new SelectList(_context.Park_PriceType, "Id", "Id", parkSurveyDataSheet.PriceTypeId);
-            return View(parkSurveyDataSheet);
+
+            return View((ParkSurveyDataSheet)parkSurveyDataSheet);           
         }
 
         // GET: Park/Delete/5

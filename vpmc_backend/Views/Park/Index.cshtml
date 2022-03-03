@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>停車位現勘資料表</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">新增</a>
 </p>
 <table class="table">
     <thead>
@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.UserId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AssetType)
+                @Html.DisplayNameFor(model => model.AssetTypeId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LandMarkCounty)
@@ -56,16 +56,16 @@
                 @Html.DisplayNameFor(model => model.ParkArea)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParkType)
+                @Html.DisplayNameFor(model => model.ParkTypeId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParkMethod)
+                @Html.DisplayNameFor(model => model.ParkMethodId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LandRightsOwner)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LandRightsStatus)
+                @Html.DisplayNameFor(model => model.LandRightsStatusId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LandRightsHolding)
@@ -74,7 +74,7 @@
                 @Html.DisplayNameFor(model => model.BuildingRightsOwner)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuildingRightsStatus)
+                @Html.DisplayNameFor(model => model.BuildingRightsStatusId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BuildingRightsHolding)
@@ -83,7 +83,7 @@
                 @Html.DisplayNameFor(model => model.OtherRights)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AssignMethod)
+                @Html.DisplayNameFor(model => model.AssignMethodId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LandUses)
@@ -95,10 +95,10 @@
                 @Html.DisplayNameFor(model => model.FloorAreaRatio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuildingUsage)
+                @Html.DisplayNameFor(model => model.BuildingUsageId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuildingStructure)
+                @Html.DisplayNameFor(model => model.BuildingStructureId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BuildingFinishDate)
@@ -128,16 +128,16 @@
                 @Html.DisplayNameFor(model => model.ValueOpinionDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AppraisalObject)
+                @Html.DisplayNameFor(model => model.AppraisalObjectId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AppraisalDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PriceType)
+                @Html.DisplayNameFor(model => model.PriceTypeId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EvaluationRightsType)
+                @Html.DisplayNameFor(model => model.EvaluationRightsTypeId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AppraisalCondition)
@@ -164,7 +164,7 @@
                 @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssetType.Id)
+                @Html.DisplayFor(modelItem => item.AssetType.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LandMarkCounty)
@@ -203,16 +203,16 @@
                 @Html.DisplayFor(modelItem => item.ParkArea)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParkType.Id)
+                @Html.DisplayFor(modelItem => item.ParkType.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParkMethod.Id)
+                @Html.DisplayFor(modelItem => item.ParkMethod.Method)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LandRightsOwner)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LandRightsStatus.Id)
+                @Html.DisplayFor(modelItem => item.LandRightsStatus.Status)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LandRightsHolding)
@@ -221,7 +221,7 @@
                 @Html.DisplayFor(modelItem => item.BuildingRightsOwner)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BuildingRightsStatus.Id)
+                @Html.DisplayFor(modelItem => item.BuildingRightsStatus.Status)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BuildingRightsHolding)
@@ -242,10 +242,10 @@
                 @Html.DisplayFor(modelItem => item.FloorAreaRatio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BuildingUsage.Id)
+                @Html.DisplayFor(modelItem => item.BuildingUsage.Usage)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BuildingStructure.Id)
+                @Html.DisplayFor(modelItem => item.BuildingStructure.Structure)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BuildingFinishDate)
@@ -275,16 +275,16 @@
                 @Html.DisplayFor(modelItem => item.ValueOpinionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppraisalObject.Id)
+                @Html.DisplayFor(modelItem => item.AppraisalObject.Object)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AppraisalDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PriceType.Id)
+                @Html.DisplayFor(modelItem => item.PriceType.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EvaluationRightsType.Id)
+                @Html.DisplayFor(modelItem => item.EvaluationRightsType.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AppraisalCondition)
@@ -296,15 +296,18 @@
                 @Html.DisplayFor(modelItem => item.SurveyDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TranscriptPath)
+                <a href="@Html.ValueFor(modelItem=>item.TranscriptPath)">@Html.DisplayFor(modelItem=>item.TranscriptPath)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotoPath)
+                @foreach (var path in Model.Select(x => x.PhotoPath).First().Split('|'))
+                {
+                    <img src="@path" width="300" height="auto" />
+                }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">查看</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
             </td>
         </tr>
 }
