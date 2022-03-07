@@ -94,7 +94,7 @@
                 @Html.DisplayNameFor(model => model.PriceTypeId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EvaluationRightsType)
+                @Html.DisplayNameFor(model => model.EvaluationRightsTypeId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AppraisalCondition)
@@ -211,10 +211,14 @@
                 <a href="@Html.ValueFor(modelItem=>item.TranscriptPath)">@Html.DisplayFor(modelItem => item.TranscriptPath)</a>
             </td>
             <td>
-                @foreach (var path in Model.Select(x => x.PhotoPath).First().Split('|'))
+                @if (Model.Select(x => x.PhotoPath).First() != null)
                 {
-                    <img src="@path" width="300" height="auto" />
+                    foreach (var path in Model.Select(x => x.PhotoPath).First().Split('|'))
+                    {
+                        <img src="@path" width="300" height="auto" />
+                    }
                 }
+
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |

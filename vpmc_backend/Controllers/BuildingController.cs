@@ -39,12 +39,12 @@ namespace vpmc_backend.Controllers
             // 檢查檔案是否上傳
             if (model.TranscriptFile == null)
             {
-                _fileErrorResponse = "Missing Transcriptfile!";
+                _fileErrorResponse = "未上傳謄本";
                 return false;
             }
             if (model.SurveyPhoto == null)
             {
-                _fileErrorResponse = "Missing Photos!";
+                _fileErrorResponse = "未上傳相片";
                 return false;
             }
             return true;
@@ -274,7 +274,7 @@ namespace vpmc_backend.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,LandArea,BuildingArea,LandRightsOwner,LandRightsStatusId,LandRightsHolding,BuildingRightsOwner,BuildingRightsStatusId,BuildingRightsHolding,OtherRights,LandUses,BuildingCoverageRatio,FloorAreaRatio,BuildingUsageId,BuildingStructureId,BuildingFinishDate,BuildingUpFloor,BuildingDownFloor,SurveyFloor,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptFile,SurveyPhoto")] BuildingSurveySheetForm buildingSurveyDataSheet)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,LandArea,BuildingArea,LandRightsOwner,LandRightsStatusId,LandRightsHolding,BuildingRightsOwner,BuildingRightsStatusId,BuildingRightsHolding,OtherRights,LandUses,BuildingCoverageRatio,FloorAreaRatio,BuildingUsageId,BuildingStructureId,BuildingFinishDate,BuildingUpFloor,BuildingDownFloor,SurveyFloor,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptFile,SurveyPhoto,TranscriptPath,PhotoPath")] BuildingSurveySheetForm buildingSurveyDataSheet)
         {
             if (id != buildingSurveyDataSheet.Id)
             {
@@ -282,8 +282,12 @@ namespace vpmc_backend.Controllers
             }
 
             // 檢查檔案是否上傳
-            if (_fileChecking(buildingSurveyDataSheet))
+            if (buildingSurveyDataSheet.SurveyPhoto != null || buildingSurveyDataSheet.TranscriptFile != null)
             {
+                if (!_fileChecking(buildingSurveyDataSheet))
+                {
+                    return StatusCode(422, _fileErrorResponse);
+                }
                 // 檢查上傳路徑是否存在
                 if (!Directory.Exists(_buildingSDS_path))
                 {
@@ -295,6 +299,7 @@ namespace vpmc_backend.Controllers
 
                 buildingSurveyDataSheet.TranscriptPath = filePathMeta[0];
                 buildingSurveyDataSheet.PhotoPath = filePathMeta[1];
+
             }
 
             //

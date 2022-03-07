@@ -36,12 +36,12 @@ namespace vpmc_backend.Controllers
             // 檢查檔案是否上傳
             if (model.TranscriptFile == null)
             {
-                _fileErrorResponse = "Missing Transcriptfile!";
+                _fileErrorResponse = "未上傳謄本";
                 return false;
             }
             if (model.SurveyPhoto == null)
             {
-                _fileErrorResponse = "Missing Photos!";
+                _fileErrorResponse = "未上傳相片";
                 return false;
             }
             return true;
@@ -263,7 +263,7 @@ namespace vpmc_backend.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,LandArea,LandRightsOwner,LandRightsStatusId,LandRightsHolding,OtherRights,LandUses,BuildingCoverageRatio,FloorAreaRatio,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptFile,SurveyPhoto")] LandSurveySheetForm landSurveyDataSheet)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,AssetTypeId,LandMarkCounty,LandMarkVillage,LandMarkName,LandMarkCode,BuildMarkCounty,BuildMarkVillage,BuildMarkName,BuildMarkCode,BuildAddressCounty,BuildAddressVillage,BuildAddress,LandArea,LandRightsOwner,LandRightsStatusId,LandRightsHolding,OtherRights,LandUses,BuildingCoverageRatio,FloorAreaRatio,InspectionDate,ValueOpinionDate,AppraisalObjectId,AppraisalDescription,PriceTypeId,EvaluationRightsTypeId,AppraisalCondition,SurveyorName,SurveyDescription,TranscriptFile,SurveyPhoto, TranscriptPath, PhotoPath")] LandSurveySheetForm landSurveyDataSheet)
         {
             if (id != landSurveyDataSheet.Id)
             {
@@ -271,18 +271,24 @@ namespace vpmc_backend.Controllers
             }
 
             // 檢查檔案是否上傳
-            if (_fileChecking(landSurveyDataSheet))
+            if (landSurveyDataSheet.SurveyPhoto != null || landSurveyDataSheet.TranscriptFile != null)
             {
+                if (!_fileChecking(landSurveyDataSheet))
+                {
+                    return StatusCode(422, _fileErrorResponse);
+                }
                 // 檢查上傳路徑是否存在
                 if (!Directory.Exists(_landSDS_path))
                 {
                     Directory.CreateDirectory(_landSDS_path);
                 }
+
                 // 上傳檔案
                 string[] filePathMeta = _uploadFiles(_landSDS_path, landSurveyDataSheet);
 
                 landSurveyDataSheet.TranscriptPath = filePathMeta[0];
                 landSurveyDataSheet.PhotoPath = filePathMeta[1];
+
             }
 
             //
