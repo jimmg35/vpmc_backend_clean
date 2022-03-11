@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
 <h1>停車位現勘資料表</h1>
@@ -299,9 +298,9 @@
                 <a href="@Html.ValueFor(modelItem=>item.TranscriptPath)">@Html.DisplayFor(modelItem=>item.TranscriptPath)</a>
             </td>
             <td>
-                @if (Model.Select(x => x.PhotoPath).First() != null)
+                @if (item.PhotoPath != null)
                 {
-                    foreach (var path in Model.Select(x => x.PhotoPath).First().Split('|'))
+                    foreach (var path in item.PhotoPath.Split('|'))
                     {
                         <img src="@path" width="300" height="auto" />
                     }
