@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
             <h3>步驟一：載入勘估標的土地/建物謄本</h3>
             <input id="Transcripts" type="file" asp-for="TranscriptFile" class="form-control"/>
             <input type="hidden" asp-for="TranscriptPath" value=@ViewData["Transcript"]/>
