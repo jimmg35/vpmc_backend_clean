@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
             <h3>步驟一：載入勘估標的土地/建物謄本</h3>
             <input id="Transcripts" type="file" asp-for="TranscriptFile" class="form-control"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -150,12 +150,12 @@
                 <label asp-for="BuildingStructureId" class="control-label">4.建物建造：</label>
                 @{
                     SelectList BuildingStructureList = new SelectList(new List<SelectListItem> {
-                        new SelectListItem{ Text = "鋼骨造", Value="15"},
-                        new SelectListItem{ Text = "鋼骨鋼筋混凝土造", Value="16"},
-                        new SelectListItem{ Text = "鋼筋混凝土造", Value="17"},
-                        new SelectListItem{ Text = "鋼架造", Value="18"},
-                        new SelectListItem{ Text = "輕型鋼架造", Value="19"},
-                        new SelectListItem{ Text = "加強磚造", Value="20"}
+                        new SelectListItem{ Text = "鋼骨造", Value="1"},
+                        new SelectListItem{ Text = "鋼骨鋼筋混凝土造", Value="2"},
+                        new SelectListItem{ Text = "鋼筋混凝土造", Value="3"},
+                        new SelectListItem{ Text = "鋼架造", Value="4"},
+                        new SelectListItem{ Text = "輕型鋼架造", Value="5"},
+                        new SelectListItem{ Text = "加強磚造", Value="6"}
                     }, "Value", "Text");
                 }
                 @Html.DropDownListFor(m => m.BuildingStructureId, BuildingStructureList)

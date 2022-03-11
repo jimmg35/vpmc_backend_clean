@@ -104,7 +104,7 @@ namespace vpmc_backend.Controllers
                     foreach (var img in paths)
                     {
                         var path_spliced = img.Split("wwwroot");
-                        if (paths.Count() > 2)
+                        if (path_spliced.Count() > 2)
                         {
                             new_paths.Add(path_spliced[2]);
                         }
