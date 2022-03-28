@@ -93,26 +93,36 @@ namespace vpmc_backend.Controllers
             {
                 if (item.TranscriptPath != null)
                 {
-                    if (item.TranscriptPath.Split("wwwroot").Count() > 1)
+                    var path_spliced = item.TranscriptPath.Split("wwwroot");
+                    if (path_spliced.Count() > 2)
                     {
-                        item.TranscriptPath = item.TranscriptPath.Split("wwwroot")[1];
+                        item.TranscriptPath = path_spliced[2];
                     }
-                }
+                    else
+                    {
+                        item.TranscriptPath = path_spliced[1];
+                    }
 
+                }
                 if (item.PhotoPath != null)
                 {
-                    if (item.PhotoPath.Split('|').Count()>1)
+                    var paths = item.PhotoPath.Split('|').SkipLast(1).ToList();
+                    var new_paths = new List<string>();
+                    foreach (var img in paths)
                     {
-                        var paths = item.PhotoPath.Split('|').SkipLast(1).ToList();
-                        var new_paths = new List<string>();
-                        foreach (var img in paths)
+                        var path_spliced = img.Split("wwwroot");
+                        if (path_spliced.Count() > 2)
                         {
-                            new_paths.Add(img.Split("wwwroot")[1]);
+                            new_paths.Add(path_spliced[2]);
                         }
-                        item.PhotoPath = string.Join('|', new_paths);
-                    }
-                }
+                        else
+                        {
+                            new_paths.Add(path_spliced[1]);
+                        }
 
+                    }
+                    item.PhotoPath = string.Join('|', new_paths);
+                }
             }
 
             return View(await webApiContext.ToListAsync());
@@ -143,14 +153,21 @@ namespace vpmc_backend.Controllers
             {
                 return NotFound();
             }
-
             string fileRelative = "";
             if (parkSurveyDataSheet.TranscriptPath != null)
             {
                 var file = parkSurveyDataSheet.TranscriptPath;
-                if (file.Split("wwwroot").Count()>1)
+                var paths_spliced = file.Split("wwwroot");
+                if (paths_spliced.Count() > 1)
                 {
-                   fileRelative = file.Split("wwwroot")[1];
+                    if (paths_spliced.Count() > 2)
+                    {
+                        fileRelative = paths_spliced[2];
+                    }
+                    else
+                    {
+                        fileRelative = paths_spliced[1];
+                    }
                 }
             }
 
@@ -160,7 +177,19 @@ namespace vpmc_backend.Controllers
                 var imageList = parkSurveyDataSheet.PhotoPath.Split('|').SkipLast(1).ToList();
                 foreach (var im in imageList)
                 {
-                    imageList_Relative.Add(im.Split("wwwroot")[1]);
+                    var paths_spliced = im.Split("wwwroot");
+                    if (paths_spliced.Count() > 1)
+                    {
+                        if (paths_spliced.Count() > 2)
+                        {
+                            imageList_Relative.Add(paths_spliced[2]);
+                        }
+                        else
+                        {
+                            imageList_Relative.Add(paths_spliced[1]);
+                        }
+                    }
+
                 }
             }
 
