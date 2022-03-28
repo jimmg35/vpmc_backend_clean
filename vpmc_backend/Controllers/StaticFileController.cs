@@ -23,7 +23,7 @@ namespace vpmc_backend.Controllers
         {
             _environment = environment;
             _staticFile_path = _environment.WebRootPath + "\\staticFiles\\";
-            string[] items = { "GeneralLaw", "Bulletin" };
+            string[] items = { "GeneralLaw", "Bulletin", "ReportSample" };
             _item = new List<string>(items);
         }
 
