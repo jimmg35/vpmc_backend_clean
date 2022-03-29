@@ -24,10 +24,11 @@ namespace vpmc_backend.Controllers
 
         [AllowAnonymous]
         [HttpGet("compare")]
-        public List<Deal_Manage> Compare(string county, string town, string transactionInterval, string assertType, string totalUnitsInterval, int age)
+        public List<Deal_Manage> Compare(string county, string town, string transactionInterval, string assertType, string totalUnitsInterval, string age)
         {
             string[] transactionQuery = transactionInterval.Split("-");
             string[] totalUnitQuery = totalUnitsInterval.Split("-");
+            string[] totalAgeQuery = totalUnitsInterval.Split("-");
 
             var query = _context.Deal_Manage
                 .Where(x => x.County == county && x.Town == town && x.BuildingState.Contains(assertType))
@@ -40,7 +41,7 @@ namespace vpmc_backend.Controllers
                 }).ToList();
 
             var results = query
-                .Where(x => x.date >= DateTime.Parse(transactionQuery[0]) && x.date < DateTime.Parse(transactionQuery[1]) && x.area >= double.Parse(totalUnitQuery[0]) && x.area < double.Parse(totalUnitQuery[1]) && x.age <= age)
+                .Where(x => x.date >= DateTime.Parse(transactionQuery[0]) && x.date < DateTime.Parse(transactionQuery[1]) && x.area >= double.Parse(totalUnitQuery[0]) && x.area < double.Parse(totalUnitQuery[1]) && x.age >= double.Parse(totalAgeQuery[0]) && x.age <= double.Parse(totalAgeQuery[1]))
                 .Select(x => x.x)
                 .ToList();
 
