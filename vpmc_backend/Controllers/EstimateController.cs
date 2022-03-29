@@ -28,7 +28,7 @@ namespace vpmc_backend.Controllers
         {
             string[] transactionQuery = transactionInterval.Split("-");
             string[] totalUnitQuery = totalUnitsInterval.Split("-");
-            string[] totalAgeQuery = totalUnitsInterval.Split("-");
+            string[] totalAgeQuery = age.Split("-");
 
             var query = _context.Deal_Manage
                 .Where(x => x.County == county && x.Town == town && x.BuildingState.Contains(assertType))
@@ -39,6 +39,9 @@ namespace vpmc_backend.Controllers
                     date = DateTime.Parse(x.TransactionDate),
                     age = DateTime.Now.Year - DateTime.Parse(x.CompletionDate).Year
                 }).ToList();
+
+            Debug.WriteLine(int.Parse(totalAgeQuery[0]));
+            Debug.WriteLine(int.Parse(totalAgeQuery[1]));
 
             var results = query
                 .Where(x => x.date >= DateTime.Parse(transactionQuery[0]) && x.date < DateTime.Parse(transactionQuery[1]) && x.area >= double.Parse(totalUnitQuery[0]) && x.area < double.Parse(totalUnitQuery[1]) && x.age >= int.Parse(totalAgeQuery[0]) && x.age <= int.Parse(totalAgeQuery[1]))
