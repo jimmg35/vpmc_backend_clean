@@ -36,7 +36,7 @@ namespace vpmc_backend.Controllers
                 {
                     x,
                     area = x.BuildingShiftingArea,
-                    date = DateTime.Parse(x.CompletionDate),
+                    date = DateTime.Parse(x.TransactionDate),
                     age = DateTime.Now.Year - DateTime.Parse(x.CompletionDate).Year
                 }).ToList();
 
