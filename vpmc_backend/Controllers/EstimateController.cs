@@ -41,7 +41,7 @@ namespace vpmc_backend.Controllers
                 }).ToList();
 
             var results = query
-                .Where(x => x.date >= DateTime.Parse(transactionQuery[0]) && x.date < DateTime.Parse(transactionQuery[1]) && x.area >= double.Parse(totalUnitQuery[0]) && x.area < double.Parse(totalUnitQuery[1]) && x.age >= double.Parse(totalAgeQuery[0]) && x.age <= double.Parse(totalAgeQuery[1]))
+                .Where(x => x.date >= DateTime.Parse(transactionQuery[0]) && x.date < DateTime.Parse(transactionQuery[1]) && x.area >= double.Parse(totalUnitQuery[0]) && x.area < double.Parse(totalUnitQuery[1]) && x.age >= int.Parse(totalAgeQuery[0]) && x.age <= int.Parse(totalAgeQuery[1]))
                 .Select(x => x.x)
                 .ToList();
 
